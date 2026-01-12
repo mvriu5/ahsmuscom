@@ -1,35 +1,28 @@
+import { AboutSection } from "@/components/sections/about-section"
+import { ProjectSection } from "@/components/sections/project-section"
+import { BlogSection } from "@/components/sections/blog-section"
+import { HeatmapSection } from "@/components/sections/heatmap-section"
 import Link from "next/link"
 
 export default async function IndexPage() {
 
     return (
-        <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-16">
-            <div className={"flex items-center gap-4 justify-between"}>
-                <div className={"flex flex-col"}>
-                    <h1 className={"text-2xl"}>Marius Ahsmus</h1>
-                    <p className={"font-mono text-sm"}>Frontend Developer</p>
-                </div>
-                <button
-                    className={"flex items-center gap-2 px-4 py-2 rounded-sm border border-zinc-500 shadow-sm bg-zinc-800 text-zinc-200"}
-                    type="button"
-                >
-                    Book a call
-                </button>
-            </div>
+        <div className="relative min-h-screen w-full font-sans">
+            {/* Vertical Lines */}
+            <div className="absolute top-0 bottom-0 left-124 w-px border-r border-dashed border-primary/50 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-124 w-px border-l border-dashed border-primary/50 pointer-events-none" />
 
-            <div className={"flex flex-col"}>
-                <h2 className={"text-xl font-medium"}>Projects</h2>
-                <Link href="https://tryforge.io" className={"hover:bg-zinc-200 rounded-sm px-4 py-2"}>
-                    Forge
-                </Link>
-                <Link href="https://code.tech" className={"hover:bg-zinc-200 rounded-sm px-4 py-2"}>
-                    Code0
-                </Link>
-                <Link href="/blog" className={"hover:bg-zinc-200 rounded-sm px-4 py-2"}>
-                    Blog
-                </Link>
-            </div>
+            {/* Horizontal Lines */}
+            <div className="absolute left-0 right-0 top-16 h-px border-b border-dashed border-primary/50 pointer-events-none" />
+            <div className="absolute left-0 right-0 bottom-16 h-px border-t border-dashed border-primary/50 pointer-events-none" />
 
-        </main>
+            {/* Content */}
+            <main className="py-16 px-124 flex flex-col gap-16">
+                <AboutSection />
+                <ProjectSection />
+                <BlogSection />
+                <HeatmapSection />
+            </main>
+        </div>
     )
 }
