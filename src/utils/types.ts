@@ -3,7 +3,7 @@ import { IconSvgElement } from "@hugeicons/react"
 export type ProjectItem = {
     title: string
     description: string
-    icon: IconSvgElement
+    image: string
     popoverImage: string
     detailedDescription: string
     href: string

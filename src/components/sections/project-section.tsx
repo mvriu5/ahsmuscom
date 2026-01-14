@@ -1,15 +1,14 @@
 import { Section } from "@/components/section"
 import { ProjectItem } from "@/utils/types"
-import { Globe02Icon, LaptopProgrammingIcon, PaintBoardIcon } from "@hugeicons/core-free-icons"
 import { ProjectCard } from "../cards/project-card"
-import { Tooltip, TooltipTrigger } from "../ui/tooltip"
 import { ProjectTooltip } from "../project-tooltip"
+import { Tooltip, TooltipTrigger } from "../ui/tooltip"
 
 const projects: ProjectItem[] = [
     {
         title: "E-Commerce Platform",
         description: "A modern shopping experience built with Next.js and Stripe.",
-        icon: Globe02Icon,
+        image: "/forge.png",
         popoverImage: "https://www.structly.de/opengraph-image",
         detailedDescription: "Full-stack e-commerce solution featuring real-time inventory management, secure payments via Stripe, and a responsive UI designed with Tailwind CSS.",
         href: "https://www.structly.de"
@@ -17,7 +16,7 @@ const projects: ProjectItem[] = [
     {
         title: "Portfolio Dashboard",
         description: "Analytics dashboard for tracking crypto and stock investments.",
-        icon: LaptopProgrammingIcon,
+        image: "/structly.png",
         popoverImage: "/projects/dashboard.jpg",
         detailedDescription: "Interactive dashboard providing real-time data visualization using Recharts. Integrates with multiple financial APIs to track portfolio performance.",
         href: "https://example.com/dashboard"
@@ -25,7 +24,7 @@ const projects: ProjectItem[] = [
     {
         title: "Creative Studio",
         description: "Digital agency website with immersive 3D animations.",
-        icon: PaintBoardIcon,
+        image: "/codezero.png",
         popoverImage: "/projects/studio.jpg",
         detailedDescription: "Award-winning agency site featuring WebGL interactions powered by Three.js and React-Three-Fiber, delivering a unique user experience.",
         href: "https://example.com/studio"
