@@ -1,12 +1,16 @@
-import { IconSvgElement } from "@hugeicons/react"
-
 export type ProjectItem = {
     title: string
     description: string
-    image: string
+    popoverImage: string
+    detailedDescription: string
+    href: string
+    live: boolean
+}
+
+export type BlogItem = {
+    title: string
+    description: string
     popoverImage: string
     detailedDescription: string
     href: string
 }
-
-export type BlogItem = ProjectItem

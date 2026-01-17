@@ -117,10 +117,23 @@
 }
 
 @layer base {
-* {
-  @apply border-border outline-ring/50;
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+
+    .animate-live {
+        animation: live 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
 }
-body {
-  @apply bg-background text-foreground;
-}
+
+@keyframes live {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .7;
+    }
 }
