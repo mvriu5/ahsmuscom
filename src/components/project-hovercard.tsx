@@ -2,12 +2,19 @@ import Image from "next/image"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ProjectItem } from "@/utils/types"
-import { TooltipContent } from "./ui/tooltip"
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons"
+import { HoverCardContent } from "./ui/hover-card"
 
-export function ProjectTooltip({ project }: { project: ProjectItem }) {
+export function ProjectHoverCard({ project }: { project: ProjectItem }) {
     return (
-        <TooltipContent className="p-0 w-[320px] overflow-hidden shadow-xl" side="bottom" sideOffset={12} align="end">
+        <HoverCardContent
+            className="p-0 w-[320px] overflow-hidden shadow-xl"
+            side="bottom"
+            sideOffset={12}
+            align="end"
+            onPointerEnter={undefined}
+            onPointerLeave={undefined}
+        >
             <div className="relative w-full aspect-video">
                 <Image
                     src={project.popoverImage}
@@ -32,6 +39,6 @@ export function ProjectTooltip({ project }: { project: ProjectItem }) {
                     </Link>
                 </div>
             </div>
-        </TooltipContent>
+        </HoverCardContent>
     )
 }

@@ -1,8 +1,8 @@
 import { Section } from "@/components/section"
 import { ProjectItem } from "@/utils/types"
 import { ProjectCard } from "../cards/project-card"
-import { ProjectTooltip } from "../project-tooltip"
-import { Tooltip, TooltipTrigger } from "../ui/tooltip"
+import { ProjectHoverCard } from "../project-hovercard"
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card"
 
 const projects: ProjectItem[] = [
     {
@@ -36,12 +36,12 @@ export function ProjectSection() {
         <Section title="02 Projects">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {projects.map((project, index) => (
-                    <Tooltip key={index}>
-                        <TooltipTrigger delay={500} render={
+                    <HoverCard key={index} followCursor>
+                        <HoverCardTrigger render={
                             <ProjectCard project={project}/>
                         }/>
-                        <ProjectTooltip project={project}/>
-                    </Tooltip>
+                        <ProjectHoverCard project={project}/>
+                    </HoverCard>
                 ))}
             </div>
         </Section>

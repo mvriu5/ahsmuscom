@@ -14,12 +14,12 @@ export default async function IndexPage() {
     return (
         <div className="relative min-h-screen w-full font-sans">
             {/* Vertical Lines */}
-            <div className="absolute top-0 bottom-0 left-4 sm:left-148 w-px border-r border-dashed border-primary pointer-events-none" />
-            <div className="absolute top-0 bottom-0 right-4 sm:right-148 w-px border-l border-dashed border-primary pointer-events-none" />
+            <div className="absolute top-0 bottom-0 left-4 sm:left-148 w-px border-r border-dashed border-gray-400 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-4 sm:right-148 w-px border-l border-dashed border-gray-400 pointer-events-none" />
 
             {/* Horizontal Lines */}
-            <div className="absolute left-0 right-0 top-16 h-px border-b border-dashed border-primary pointer-events-none" />
-            <div className="absolute left-0 right-0 bottom-16 h-px border-t border-dashed border-primary pointer-events-none" />
+            <div className="absolute left-0 right-0 top-16 h-px border-b border-dashed border-gray-400 pointer-events-none" />
+            <div className="absolute left-0 right-0 bottom-16 h-px border-t border-dashed border-gray-400 pointer-events-none" />
 
             {/* Content */}
             <main className="py-16 px-4 sm:px-148 flex flex-col gap-16">
