@@ -1,5 +1,6 @@
 import { Section } from "@/components/section"
-import { cn } from "@/utils/cn"
+import { LayoutThreeColumnFreeIcons } from "@hugeicons/core-free-icons"
+import { ActivityCalendar, ThemeInput } from 'react-activity-calendar'
 
 type Contribution = {
     date: string
@@ -76,22 +77,15 @@ export async function HeatmapSection() {
         })
     }
 
-  return (
+    const minimalTheme: ThemeInput = {
+        dark: ['hsl(0, 0%, 92%)', 'mediumseagreen'],
+    }
+
+    return (
         <Section title="04 Github Activity">
-            <div className="w-full overflow-x-auto pb-4">
-                <div className="grid grid-rows-7 grid-flow-col gap-0.5">
-                    {Array.from({ length: emptyDays }).map((_, index) => (
-                        <div key={`empty-${index}`} className="size-2.5" />
-                    ))}
-                    {contributions.map((day, index) => (
-                        <div
-                            key={index}
-                            className={cn("size-2.5 rounded-xs", getColor(day.level))}
-                            title={`${day.count} contributions on ${day.date}`}
-                        />
-                    ))}
-                </div>
+            <div className="overflow-x-auto pb-4">
+                <ActivityCalendar data={contributions} theme={minimalTheme}/>
             </div>
         </Section>
-  )
+    )
 }

@@ -4,6 +4,8 @@ import {
     Map,
     MapMarker,
     MapRef,
+    MapTileLayer,
+    MapZoomControl,
     MarkerContent
 } from "@/components/ui/map"
 import { useEffect, useRef, useState } from "react"
@@ -28,16 +30,12 @@ export function MapSection() {
 
     return (
         <Section title="05 Location">
-            <div className="h-48 overflow-hidden rounded-md border border-border">
-                {!!mapStyle &&
-                    <Map ref={mapRef} center={[51.327, 12.374]} zoom={12} styles={mapStyle}>
-                        <MapMarker longitude={51.347} latitude={12.374}>
-                            <MarkerContent>
-                                <div className="size-4 rounded-full bg-primary border-2 border-white shadow-lg" />
-                            </MarkerContent>
-                        </MapMarker>
-                    </Map>
-                }
+            <div className="h-68 overflow-hidden rounded-md border border-border">
+                <Map center={[49.927, 12.376]} zoom={5}>
+                    <MapTileLayer />
+                        <MapMarker position={[51.347, 12.376]}>
+                    </MapMarker>
+                </Map>
             </div>
         </Section>
     )
