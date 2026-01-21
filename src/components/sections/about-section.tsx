@@ -1,5 +1,8 @@
+import { HugeiconsIcon } from "@hugeicons/react";
 import { Section } from "../section";
+import { GitHub, Instagram, XformerlyTwitter } from "../svg-icons";
 import { Button } from "../ui/button";
+import { Mail01Icon } from "@hugeicons/core-free-icons";
 
 export function AboutSection() {
     return (
@@ -12,18 +15,19 @@ export function AboutSection() {
                     <p className="text-sm text-secondary-foreground/75 font-semibold">Software Engineer</p>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Button size={"xs"} variant={"outline"}>
+                            <GitHub/>
                             Github
                         </Button>
                         <Button size={"xs"} variant={"outline"}>
-                            X / Twitter
+                            <XformerlyTwitter/>
+                            X (formerly Twitter)
                         </Button>
                         <Button size={"xs"} variant={"outline"}>
+                            <Instagram/>
                             Instagram
                         </Button>
                         <Button size={"xs"} variant={"outline"}>
-                            Youtube
-                        </Button>
-                        <Button size={"xs"} variant={"outline"}>
+                            <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5}/>
                             Mail
                         </Button>
                     </div>

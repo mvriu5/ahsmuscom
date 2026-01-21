@@ -8,21 +8,6 @@ type Contribution = {
     level: 0 | 1 | 2 | 3 | 4
 }
 
-const getColor = (level: number) => {
-    switch (level) {
-        case 1:
-            return "bg-green-200"
-        case 2:
-            return "bg-green-300"
-        case 3:
-            return "bg-green-400"
-        case 4:
-            return "bg-green-500"
-        default:
-            return "bg-gray-100"
-    }
-}
-
 export async function HeatmapSection() {
     let contributions: Contribution[] = []
     let emptyDays = 0
@@ -78,13 +63,13 @@ export async function HeatmapSection() {
     }
 
     const minimalTheme: ThemeInput = {
-        dark: ['hsl(0, 0%, 92%)', 'mediumseagreen'],
+        dark: ['hsl(0, 0%, 94%)', 'mediumseagreen'],
     }
 
     return (
         <Section title="04 Github Activity">
             <div className="overflow-x-auto pb-4">
-                <ActivityCalendar data={contributions} theme={minimalTheme}/>
+                <ActivityCalendar data={contributions} theme={minimalTheme} />
             </div>
         </Section>
     )

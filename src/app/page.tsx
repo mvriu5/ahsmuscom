@@ -1,3 +1,4 @@
+import { FadeIn } from "@/components/fade-in"
 import { AboutSection } from "@/components/sections/about-section"
 import { BlogSection } from "@/components/sections/blog-section"
 import { FooterSection } from "@/components/sections/footer-section"
@@ -16,12 +17,24 @@ export default async function IndexPage() {
             <div className="absolute top-0 bottom-0 right-0 pr-4 sm:pr-[10%] md:pr-[16%] lg:pr-[20%] xl:pr-[25%] w-px border-l border-dashed border-border pointer-events-none" />
 
             <main className="py-16 px-4 sm:px-[10%] md:px-[16%] lg:px-[20%] xl:px-[25%] flex flex-col gap-16">
-                <AboutSection />
-                <ProjectSection />
-                <BlogSection />
-                <HeatmapSection />
-                <MapSection />
-                <FooterSection/>
+                <FadeIn>
+                    <AboutSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <ProjectSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <BlogSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <HeatmapSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <MapSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <FooterSection/>
+                </FadeIn>
             </main>
         </div>
     )

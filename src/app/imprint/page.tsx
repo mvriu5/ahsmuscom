@@ -1,5 +1,7 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Button } from "@/components/ui/button"
+import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
+import Link from "next/link"
 
 export default function ImprintPage() {
     return (
@@ -16,8 +18,9 @@ export default function ImprintPage() {
 
                     <div className="flex flex-col gap-16 p-8">
                         <Link href="/">
-                            <Button variant="ghost">
-                                Go back
+                            <Button variant="ghost" className={"text-gray-500"}>
+                                <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
+                                Back
                             </Button>
                         </Link>
 

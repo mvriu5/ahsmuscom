@@ -8,7 +8,7 @@ import Link from "next/link"
 
 export function ProjectCard({ project }: { project: ProjectItem }) {
     return (
-        <Card className="h-36 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-4">
+        <Card className="h-36 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-4 data-popup-open:cursor-default">
             <CardContent className="h-full flex items-center gap-2 px-0">
                 <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-2">
