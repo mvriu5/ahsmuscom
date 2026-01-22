@@ -1,22 +1,20 @@
 import Link from "next/link"
-import type { SanityDocument } from "next-sanity"
-
 import { client } from "@/sanity/lib/client"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
 import { BlogCard } from "@/components/cards/blog-card"
-import { BlogItem } from "@/utils/types"
+import { Post } from "@/sanity/lib/queries"
 
 const POSTS_QUERY = `*[
   _type == "post"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`
+]|order(publishedAt desc)[0...12]{_id, title, slug, description, popoverImage, detailedDescription, publishedAt}`
 
 const options = { next: { revalidate: 30 } }
 
 export default async function IndexPage() {
-    const posts = await client.fetch<SanityDocument[]>(POSTS_QUERY, {}, options)
+    const posts = await client.fetch<Post[]>(POSTS_QUERY, {}, options)
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
@@ -26,7 +24,7 @@ export default async function IndexPage() {
             <div className="absolute top-0 bottom-0 left-0 pl-4 sm:pl-[10%] lg:pl-[25%] w-px border-r border-dashed border-border pointer-events-none" />
             <div className="absolute top-0 bottom-0 right-0 pr-4 sm:pr-[10%] lg:pr-[25%] w-px border-l border-dashed border-border pointer-events-none" />
 
-            <main className="py-16 px-4 sm:px-[10%] lg:px-[25%]">
+            <main className="py-16 px-4 sm:px-[10%] lg:px-[25%">
 
                 <div className="border-t border-dashed border-border">
 
@@ -41,12 +39,9 @@ export default async function IndexPage() {
                         <h1 className="text-4xl font-bold mb-8">Posts</h1>
                         <ul className="flex flex-col gap-y-4">
                             {posts.map((post) => {
-                                const blog: BlogItem = {
-                                    title: post.title,
-                                    description: "",
-                                    popoverImage: "",
-                                    detailedDescription: "",
-                                    href: post.slug.current
+                                const blog = {
+                                    ...post,
+                                    href: `/blog/${post.slug.current}`
                                 }
 
                                 return (

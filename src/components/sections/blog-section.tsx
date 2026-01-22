@@ -1,25 +1,27 @@
-import { Section } from "@/components/section"
-import { BlogItem } from "@/utils/types"
-import { BlogCard } from "../cards/blog-card"
+import { Section } from "@/components/section";
+import { BlogCard } from "../cards/blog-card";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
+import type { Post } from "@/sanity/lib/queries";
+import { postsQuery } from "@/sanity/lib/queries";
 
-const blogs: BlogItem[] = [
-    {
-        title: "The Future of Web Development",
-        description: "Exploring the latest trends in frontend frameworks and serverless architecture.",
-        popoverImage: "/blog/web-dev-future.jpg",
-        detailedDescription: "An in-depth look at how Next.js, React Server Components, and Edge computing are reshaping how we build the web.",
-        href: "/blog/future-of-web-dev"
-    },
-]
 
-export function BlogSection() {
+export async function BlogSection() {
+    const blogs: Post[] = await client.fetch(postsQuery);
+
+    const blogsWithImageUrl = blogs.map(blog => ({
+        ...blog,
+        href: `/blog/${blog.slug.current}`,
+        popoverImage: blog.popoverImage ? urlFor(blog.popoverImage).url() : undefined
+    }));
+
     return (
         <Section title="03 Blog">
             <div className="flex flex-col gap-4">
-                {blogs.map((blog, index) => (
-                    <BlogCard key={index} blog={blog}/>
+                {blogsWithImageUrl.map((blog) => (
+                    <BlogCard key={blog._id} blog={blog} />
                 ))}
             </div>
         </Section>
-    )
+    );
 }

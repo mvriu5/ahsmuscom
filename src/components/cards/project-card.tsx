@@ -1,12 +1,11 @@
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
 import { cn } from "@/utils/cn"
-import { ProjectItem } from "@/utils/types"
 import { LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import Image from "next/image"
 import Link from "next/link"
+import { Project } from "@/sanity/lib/queries"
 
-export function ProjectCard({ project }: { project: ProjectItem }) {
+export function ProjectCard({ project }: { project: Project & { href: string } }) {
     return (
         <Card className="h-36 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-4 data-popup-open:cursor-default">
             <CardContent className="h-full flex items-center gap-2 px-0">

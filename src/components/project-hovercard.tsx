@@ -1,27 +1,20 @@
-import Image from "next/image"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
-import { ProjectItem } from "@/utils/types"
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons"
 import { HoverCardContent } from "./ui/hover-card"
+import type { Project } from "@/sanity/lib/queries"
+import { PortableText } from "@portabletext/react"
 
-export function ProjectHoverCard({ project }: { project: ProjectItem }) {
+export function ProjectHoverCard({ project }: { project: Project & { href: string } }) {
     return (
         <HoverCardContent
             className="p-0 w-[320px] overflow-hidden shadow-xl"
             side="bottom"
             sideOffset={12}
             align="end"
-            onPointerEnter={undefined}
-            onPointerLeave={undefined}
         >
-            <div className="relative w-full aspect-video">
-                <Image
-                    src={project.popoverImage}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                />
+            <div className="relative w-full aspect-video bg-gray-100 flex items-center justify-center p-4">
+                <PortableText value={project.popoverContent} />
             </div>
             <div className="p-4 space-y-2">
                 <h4 className="font-bold text-base">{project.title}</h4>
