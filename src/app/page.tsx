@@ -5,6 +5,7 @@ import { FooterSection } from "@/components/sections/footer-section"
 import { HeatmapSection } from "@/components/sections/heatmap-section"
 import { MapSection } from "@/components/sections/map-section"
 import { ProjectSection } from "@/components/sections/project-section"
+import { StackSection } from "@/components/sections/stack-section"
 
 export default async function IndexPage() {
 
@@ -25,6 +26,9 @@ export default async function IndexPage() {
                 </FadeIn>
                 <FadeIn delay={0.1}>
                     <BlogSection />
+                </FadeIn>
+                <FadeIn delay={0.1}>
+                    <StackSection/>
                 </FadeIn>
                 <FadeIn delay={0.1}>
                     <HeatmapSection />

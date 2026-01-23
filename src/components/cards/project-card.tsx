@@ -5,7 +5,7 @@ import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { Project } from "@/sanity/lib/queries"
 
-export function ProjectCard({ project }: { project: Project & { href: string } }) {
+export function ProjectCard({ project }: { project: Project }) {
     return (
         <Card className="h-36 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-4 data-popup-open:cursor-default">
             <CardContent className="h-full flex items-center gap-2 px-0">
@@ -26,7 +26,7 @@ export function ProjectCard({ project }: { project: Project & { href: string } }
                 </div>
             </CardContent>
             <CardFooter className="justify-end items-end h-full px-0">
-                <Link href={project.href} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
+                <Link href={project.link ?? ""} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
                     <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
                     View Project
                 </Link>

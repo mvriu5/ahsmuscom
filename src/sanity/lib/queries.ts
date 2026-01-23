@@ -1,4 +1,4 @@
-import { groq } from "next-sanity";
+import { groq } from "next-sanity"
 
 export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc){
     _id,
@@ -8,39 +8,37 @@ export const postsQuery = groq`*[_type == "post"] | order(publishedAt desc){
     popoverImage,
     detailedDescription,
     publishedAt
-}`;
+}`
 
 export interface Post {
-    _id: string;
-    title: string;
+    _id: string
+    title: string
     slug: {
-        current: string;
-    };
-    description: string;
-    popoverImage: any; // SanityImageSource
-    detailedDescription: any; // Portable Text
-    publishedAt: string;
+        current: string
+    }
+    description: string
+    popoverImage: any // SanityImageSource
+    detailedDescription: any // Portable Text
+    publishedAt: string
 }
 
 
 export const projectsQuery = groq`*[_type == "project"]{
     _id,
     title,
-    slug,
+    link,
     description,
     detailedDescription,
     live,
     popoverContent
-}`;
+}`
 
 export interface Project {
-    _id: string;
-    title: string;
-    slug: {
-        current: string;
-    };
-    description: string;
-    detailedDescription: string;
-    live: boolean;
-    popoverContent: any[];
+    _id: string
+    title: string
+    link: string
+    description: string
+    detailedDescription: string
+    live: boolean
+    popoverContent: any[]
 }

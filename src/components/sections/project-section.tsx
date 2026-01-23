@@ -8,15 +8,10 @@ import { HoverCard, HoverCardTrigger } from "../ui/hover-card"
 export async function ProjectSection() {
     const projects: Project[] = await client.fetch(projectsQuery)
 
-    const projectsWithHref = projects.map((project) => ({
-        ...project,
-        href: `/project/${project.slug.current}`,
-    }))
-
     return (
         <Section title="02 Projects">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {projectsWithHref.map((project) => (
+                {projects.map((project) => (
                     <HoverCard key={project._id} followCursor>
                         <HoverCardTrigger render={
                             <ProjectCard project={project} />

@@ -11,9 +11,8 @@ export const projectType = defineType({
             validation: (rule) => rule.required(),
         }),
         defineField({
-            name: 'slug',
-            type: 'slug',
-            options: {source: 'title'},
+            name: 'link',
+            type: 'url',
             validation: (rule) => rule.required(),
         }),
         defineField({

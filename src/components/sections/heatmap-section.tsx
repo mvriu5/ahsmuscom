@@ -67,7 +67,7 @@ export async function HeatmapSection() {
     }
 
     return (
-        <Section title="04 Github Activity">
+        <Section title="05 Github Activity">
             <div className="overflow-x-auto pb-4">
                 <ActivityCalendar data={contributions} theme={minimalTheme} />
             </div>

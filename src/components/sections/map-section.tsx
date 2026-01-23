@@ -8,7 +8,7 @@ import { Section } from "../section"
 
 export function MapSection() {
     return (
-        <Section title="05 Location">
+        <Section title="06 Location">
             <div className="h-68 overflow-hidden rounded-md border border-border">
                 <Map center={[49.927, 12.376]} zoom={5}>
                     <MapTileLayer />

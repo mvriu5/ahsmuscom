@@ -5,7 +5,7 @@ import { HoverCardContent } from "./ui/hover-card"
 import type { Project } from "@/sanity/lib/queries"
 import { PortableText } from "@portabletext/react"
 
-export function ProjectHoverCard({ project }: { project: Project & { href: string } }) {
+export function ProjectHoverCard({ project }: { project: Project }) {
     return (
         <HoverCardContent
             className="p-0 w-[320px] overflow-hidden shadow-xl"
@@ -23,8 +23,9 @@ export function ProjectHoverCard({ project }: { project: Project & { href: strin
                 </p>
                 <div className="flex justify-end mt-3">
                     <Link
-                        href={project.href}
+                        href={project.link ?? ""}
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-1 text-xs font-medium hover:underline group"
                     >
                         View Project
