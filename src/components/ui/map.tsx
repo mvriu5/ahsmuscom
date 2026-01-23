@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { cn } from "@/utils/cn"
-import { Location06Icon, MapPinpointIcon, PinIcon } from "@hugeicons/core-free-icons"
+import { Location06Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import type {
     DivIconOptions,
@@ -13,10 +13,8 @@ import type {
     Popup,
     TileLayer
 } from "leaflet"
-import "leaflet-draw/dist/leaflet.draw.css"
 import "leaflet/dist/leaflet.css"
 import {
-    MapPinIcon,
     MinusIcon,
     PlusIcon
 } from "lucide-react"
@@ -333,25 +331,18 @@ function MapControlContainer({
 
 function useLeaflet() {
     const [L, setL] = useState<typeof import("leaflet") | null>(null)
-    const [LeafletDraw, setLeafletDraw] = useState<
-        typeof import("leaflet-draw") | null
-    >(null)
 
     useEffect(() => {
-        if (L && LeafletDraw) return
+        if (L) return
         if (typeof window !== "undefined") {
             if (!L) {
                 //eslint-disable-next-line
                 setL(require("leaflet"))
             }
-            if (!LeafletDraw) {
-                //eslint-disable-next-line
-                setLeafletDraw(require("leaflet-draw"))
-            }
         }
-    }, [L, LeafletDraw])
+    }, [L])
 
-    return { L, LeafletDraw }
+    return { L }
 }
 
 
