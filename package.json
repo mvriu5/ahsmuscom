@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
-    "@calcom/atoms": "^2.3.3",
+    "@calcom/embed-react": "^1.5.3",
     "@hugeicons/core-free-icons": "^3.1.1",
     "@hugeicons/react": "^1.1.4",
     "@portabletext/react": "^6.0.2",

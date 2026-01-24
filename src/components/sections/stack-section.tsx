@@ -1,35 +1,26 @@
+import Link from "next/link"
 import { Section } from "../section"
 import {
-    GitHub,
-    XformerlyTwitter,
-    Instagram,
-    Vercel,
-    ReactIcon,
-    Nextjs,
-    DrizzleORM,
     BetterAuth,
     Biomejs,
+    DrizzleORM,
     ESLint,
+    MistralAI,
+    Motion,
+    Neon,
+    Nextjs,
     Polar,
     PostgreSQL,
-    Neon,
+    ReactIcon,
     Redis,
-    Upstash,
-    MistralAI,
     Resend,
-    TypeScript,
-    Motion,
     Sanity,
     TailwindCSS,
+    TypeScript,
+    Upstash,
+    Vercel
 } from "../svg-icons"
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "../ui/tooltip"
 import { Button } from "../ui/button"
-import Link from "next/link"
 
 const stack = [
     { name: "Next.js", icon: Nextjs, url: "https://nextjs.org/" },
@@ -58,25 +49,23 @@ export function StackSection() {
             <p className="mb-4 text-muted-foreground">
                 A selection of technologies I worked with in the past.
             </p>
-            <TooltipProvider>
-                <div className="flex flex-wrap gap-2">
-                    {stack.map((tech) => (
-                        <Link
-                            key={tech.url}
-                            href={tech.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            <Button variant="outline" size="xs">
-                                <tech.icon className="h-6 w-6" />
-                                <span className="">
-                                    {tech.name}
-                                </span>
-                            </Button>
-                        </Link>
-                    ))}
-                </div>
-            </TooltipProvider>
+            <div className="flex flex-wrap gap-2">
+                {stack.map((tech) => (
+                    <Link
+                        key={tech.url}
+                        href={tech.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <Button variant="outline" size="xs">
+                            <tech.icon className="h-6 w-6" />
+                            <span className="">
+                                {tech.name}
+                            </span>
+                        </Button>
+                    </Link>
+                ))}
+            </div>
         </Section>
     )
 }
