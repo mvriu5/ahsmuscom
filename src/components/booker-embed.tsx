@@ -7,22 +7,31 @@ import { cn } from "@/utils/cn"
 import { Calendar01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ScrollArea } from "./ui/scroll-area"
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip"
 
 export function Booker() {
     return (
         <Dialog>
-            <DialogTrigger
-                className={cn(
-                    buttonVariants({ size: "xs", variant: "outline" }),
-                    "bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200"
-                )}
-                render={
-                    <div className="flex items-center gap-2">
-                        <HugeiconsIcon icon={Calendar01Icon} />
-                        <p>Schedule a Meeting</p>
-                    </div>
-                }
-            />
+            <Tooltip>
+                <TooltipTrigger>
+                    <DialogTrigger
+                        className={cn(
+                            buttonVariants({ size: "xs", variant: "outline" }),
+                            "bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200"
+                        )}
+                        render={
+                            <button className="flex items-center gap-2">
+                                <HugeiconsIcon icon={Calendar01Icon} />
+                                <p>Schedule a Meeting</p>
+                            </button>
+                        }
+                    />
+                </TooltipTrigger>
+                <TooltipContent>
+                    Click to book a 15-minute meeting with me
+                </TooltipContent>
+            </Tooltip>
+
             <DialogContent className={"p-0 overflow-hidden h-1/2 min-w-1/2"} showCloseButton={false}>
                 <ScrollArea className="h-full">
                     <DialogHeader className="sr-only">Cal Meeting Booker</DialogHeader>

@@ -20,7 +20,7 @@ export function ProjectCard({ project }: { project: Project }) {
                         <p className={cn("text-xs font-mono", project.live ? "text-green-600" : "text-red-600")}>{project.live ? "Online" : "Dead"}</p>
                     </div>
                     <CardTitle>{project.title}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">
+                    <CardDescription className="text-xs text-gray-600">
                         {project.description}
                     </CardDescription>
                 </div>

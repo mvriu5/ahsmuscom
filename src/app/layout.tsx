@@ -1,7 +1,9 @@
+import { Toaster } from "sonner"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
 import type {ReactNode} from "react"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const fontSans = Inter({ subsets:['latin'], variable:'--font-sans' })
 
@@ -16,7 +18,10 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
     return (
         <html lang="en" className={`${geistMono.variable} ${fontSans.variable}`}>
             <body className={"antialiased"}>
-                {children}
+                <TooltipProvider>
+                    {children}
+                </TooltipProvider>
+                <Toaster />
             </body>
         </html>
     )

@@ -45,7 +45,7 @@ const stack = [
 
 export function StackSection() {
     return (
-        <Section title="05 Techstack">
+        <Section title="04 Techstack">
             <p className="mb-4 text-muted-foreground">
                 A selection of technologies I worked with in the past.
             </p>

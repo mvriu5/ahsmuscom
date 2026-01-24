@@ -12,7 +12,7 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                 </div>
                 <div className="w-full flex flex-col">
                     <CardTitle>{blog.title}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">
+                    <CardDescription className="text-xs text-gray-600">
                         {blog.description}
                     </CardDescription>
                     <Link href={blog.href} target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
