@@ -1,13 +1,12 @@
 "use client"
 
+import { Calendar01Icon, Mail01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
+import Link from "next/link"
 import { toast } from "sonner"
 import { Section } from "../section"
 import { GitHub, Instagram, XformerlyTwitter } from "../svg-icons"
 import { Button } from "../ui/button"
-import { Mail01Icon } from "@hugeicons/core-free-icons"
-import { Booker } from "../booker-embed"
-import Link from "next/link"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 export function AboutSection() {
@@ -43,17 +42,26 @@ export function AboutSection() {
                             </Button>
                         </Link>
                         <Tooltip>
-                            <TooltipTrigger>
+                            <TooltipTrigger render={
                                 <Button size={"xs"} variant={"outline"} onClick={handleCopyEmail}>
                                     <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5}/>
                                     Mail
                                 </Button>
-                            </TooltipTrigger>
+                            }/>
                             <TooltipContent>
                                 Click to copy email to clipboard
                             </TooltipContent>
                         </Tooltip>
-                        <Booker />
+                        <Link href={"https://cal.com/mvriu5/15min"} rel="noopener noreferrer" target={"_blank"}>
+                            <Button
+                                size="xs"
+                                variant="outline"
+                                className="bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200"
+                            >
+                                <HugeiconsIcon icon={Calendar01Icon} />
+                                Book a call
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </div>

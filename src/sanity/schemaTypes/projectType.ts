@@ -28,10 +28,5 @@ export const projectType = defineType({
             type: 'boolean',
             initialValue: false,
         }),
-        defineField({
-            name: 'popoverContent',
-            type: 'array',
-            of: [{type: 'block'}],
-        }),
     ],
 })

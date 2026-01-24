@@ -142,3 +142,29 @@
         opacity: .7;
     }
 }
+
+.react-activity-calendar__tooltip {
+  width: max-content;
+  max-width: calc(100vw - 20px);
+  padding: 0.2em 0.5em;
+  border-radius: 0.25em;
+  background-color: oklch(0.147 0.004 49.25);
+  color: hsl(0 0% 94%);
+  font-size: 13px;
+
+  /* See the `withArrow` setting. */
+  .react-activity-calendar__tooltip-arrow {
+    fill: hsl(0 0% 10%);
+  }
+
+  /* Use this instead of a media query - the component theme can be set */
+  /* independent of the system color scheme. */
+  &[data-color-scheme='dark'] {
+    background-color: oklch(0.147 0.004 49.25);
+    color: hsl(0 0% 94%);
+
+    .react-activity-calendar__tooltip-arrow {
+      fill: oklch(0.147 0.004 49.25);
+    }
+  }
+}
