@@ -4,10 +4,20 @@ import { Geist, Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
 import type {ReactNode} from "react"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import localFont from 'next/font/local'
 
 const fontSans = Inter({ subsets:['latin'], variable:'--font-sans' })
 
 const geistMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] })
+
+const neuton = localFont({
+    src: [{
+        path: '../../public/Neuton-Regular.ttf',
+        weight: '400'
+    }],
+    variable: '--font-neuton'
+})
+
 
 export const metadata: Metadata = {
     title: "Marius Ahsmus",
@@ -16,7 +26,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: Readonly<{ children: ReactNode }>) {
     return (
-        <html lang="en" className={`${geistMono.variable} ${fontSans.variable}`}>
+        <html lang="en" className={`${geistMono.variable} ${fontSans.variable} ${neuton.variable}`}>
             <body className={"antialiased"}>
                 <TooltipProvider>
                     {children}
