@@ -1,31 +1,93 @@
 import Image from "next/image"
 import Link from "next/link"
-import { PortableText, type SanityDocument } from "next-sanity"
+import { type SanityDocument } from "next-sanity"
 import { client } from "@/sanity/lib/client"
 import type {SanityImageSource} from "@sanity/image-url/lib/types/types"
 import createImageUrlBuilder from "@sanity/image-url"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
+import { PostContent } from "@/components/post-content"
+import type { Metadata } from "next"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
 
-const { projectId, dataset } = client.config();
+const { projectId, dataset } = client.config()
 const urlFor = (source: SanityImageSource) =>
     projectId && dataset
         ? createImageUrlBuilder({ projectId, dataset }).image(source)
         : null
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const post = await client.fetch<SanityDocument>(POST_QUERY, await params)
+
+    if (!post) {
+        return {
+            title: "Post not found",
+        }
+    }
+
+    return {
+        title: post.title,
+        description: post.description,
+        openGraph: {
+            title: post.title,
+            description: post.description,
+            type: 'article',
+            publishedTime: post.publishedAt,
+            url: `/blog/${post.slug.current}`,
+            images: [
+                {
+                    url: '',
+                    alt: post.title,
+                },
+            ],
+        },
+    }
+}
+
+
 const options = { next: { revalidate: 30 } }
 
 export default async function Blog({params}: { params: Promise<{ slug: string }> }) {
     const post = await client.fetch<SanityDocument>(POST_QUERY, await params, options)
-    const postImageUrl = post.image
-        ? urlFor(post.image)?.width(550).height(310).url()
+    const postImageUrl = post.popoverImage
+        ? urlFor(post.popoverImage)?.width(1920).height(1080).url()
         : null
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: post.title,
+        description: post.description,
+        image: postImageUrl,
+        datePublished: post.publishedAt,
+        dateModified: post._updatedAt,
+        author: {
+            '@type': 'Person',
+            name: 'Marius Ahsmus',
+            url: 'https://ahsmus.com',
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'Marius Ahsmus',
+            logo: {
+                '@type': 'ImageObject',
+                url: 'https://ahsmus.com/logo.png',
+            },
+        },
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `https://ahsmus.com/blog/${post.slug.current}`,
+        },
+    };
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] lg:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] lg:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
@@ -36,7 +98,7 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
 
                 <div className="border-t border-dashed border-border">
 
-                    <div className="flex flex-col gap-16 p-8">
+                    <div className="flex flex-col gap-8 p-8">
                         <Link href="/">
                             <Button variant="ghost" className={"text-gray-500"}>
                                 <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
@@ -45,18 +107,22 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                         </Link>
 
                         {postImageUrl && (
-                            <Image
-                                src={postImageUrl}
-                                alt={post.title}
-                                className="aspect-video rounded-xl"
-                                width="550"
-                                height="310"
-                            />
+                            <div className="w-full h-32 overflow-hidden rounded-lg">
+                                <Image
+                                    src={postImageUrl}
+                                    alt={post.title}
+                                    className="aspect-video rounded-xl"
+                                    width="1920"
+                                    height="1080"
+                                />
+                            </div>
                         )}
-                        <h1 className="text-4xl font-bold mb-8">{post.title}</h1>
-                        <div className="prose">
-                            <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p>
-                            {Array.isArray(post.body) && <PortableText value={post.body} />}
+                        <div className="flex flex-col gap-4">
+                            <h1 className="text-5xl font-neuton">{post.title}</h1>
+                            <p className="text-sm text-muted-foreground">
+                                Published: {new Date(post.publishedAt).toLocaleDateString()}
+                            </p>
+                            <PostContent body={post.detailedDescription} />
                         </div>
                     </div>
                 </div>

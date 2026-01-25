@@ -15,7 +15,7 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                     <CardDescription className="text-xs text-gray-600">
                         {blog.description}
                     </CardDescription>
-                    <Link href={blog.href} target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
+                    <Link href={blog.href} className="group w-full flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
                         <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
                         Read Article
                     </Link>

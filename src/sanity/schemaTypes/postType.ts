@@ -34,7 +34,7 @@ export const postType = defineType({
         defineField({
             name: 'detailedDescription',
             type: 'array',
-            of: [{type: 'block'}],
+            of: [{type: 'block'}, {type: 'code'}],
         }),
     ],
 })
