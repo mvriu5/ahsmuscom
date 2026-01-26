@@ -2,14 +2,14 @@ import { Section } from "@/components/section"
 import { client } from "@/sanity/lib/client"
 import { projectsQuery, type Project } from "@/sanity/lib/queries"
 import { ProjectCard } from "../cards/project-card"
-import { ProjectHoverCard } from "../project-hovercard"
+import { ProjectHoverCard } from "../cards/project-hovercard"
 import { HoverCard, HoverCardTrigger } from "../ui/hover-card"
 
 export async function ProjectSection() {
     const projects: Project[] = await client.fetch(projectsQuery)
 
     return (
-        <Section title="02 Projects">
+        <Section title="02 Projects" link="/projects">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {projects.map((project) => (
                     <HoverCard key={project._id} followCursor>

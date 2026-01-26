@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
 import { File01Icon, LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
@@ -15,10 +15,12 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                     <CardDescription className="text-xs text-gray-600">
                         {blog.description}
                     </CardDescription>
-                    <Link href={blog.href} className="group w-full flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
-                        <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
-                        Read Article
-                    </Link>
+                    <CardFooter className="justify-end items-end h-full px-0">
+                        <Link href={blog.href} className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
+                            <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
+                            Read Article
+                        </Link>
+                    </CardFooter>
                 </div>
             </CardContent>
         </Card>

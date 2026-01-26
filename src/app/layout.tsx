@@ -20,19 +20,35 @@ const neuton = localFont({
 
 
 export const metadata: Metadata = {
-  title: {
-    default: "Marius Ahsmus | Software Engineer",
-    template: "%s | Marius Ahsmus",
-  },
-  description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
-  openGraph: {
-    title: "Marius Ahsmus | Designer & Developer",
+    metadataBase: new URL("https://ahsmus.com"),
+    title: {
+        default: "Marius Ahsmus | Software Engineer",
+        template: "%s | Marius Ahsmus",
+    },
     description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
-    type: "website",
-    locale: "de_DE",
-    siteName: "Marius Ahsmus",
-  },
-  // TODO: Add twitter card metadata and a default OG image.
+    openGraph: {
+        title: "Marius Ahsmus | Designer & Developer",
+        description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
+        url: "https://ahsmus.com",
+        type: "website",
+        locale: "de_DE",
+        siteName: "Marius Ahsmus",
+        images: [
+            {
+                url: "/opengraph-image",
+                width: 1200,
+                height: 630,
+                alt: "Marius Ahsmus",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Marius Ahsmus | Software Engineer",
+        description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
+        creator: "@mvriu5",
+        images: ["/opengraph-image"],
+    },
 }
 
 export default function RootLayout({children}: Readonly<{ children: ReactNode }>) {

@@ -16,7 +16,7 @@ export async function BlogSection() {
     }));
 
     return (
-        <Section title="03 Blog">
+        <Section title="03 Blog" link="/blog">
             <div className="flex flex-col gap-4">
                 {blogsWithImageUrl.map((blog) => (
                     <BlogCard key={blog._id} blog={blog} />

@@ -3,19 +3,24 @@ import { client } from "@/sanity/lib/client"
 import { Button } from "@/components/ui/button"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
-import { BlogCard } from "@/components/cards/blog-card"
+import { ProjectCard } from "@/components/cards/project-card"
+import { Project } from "@/sanity/lib/queries"
 import { FadeIn } from "@/components/fade-in"
-import { Post } from "@/sanity/lib/queries"
 
-const POSTS_QUERY = `*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, description, popoverImage, detailedDescription, publishedAt}`
+const PROJECTS_QUERY = `*[_type == "project"]{
+    _id,
+    title,
+    link,
+    description,
+    detailedDescription,
+    live,
+    popoverContent
+}`
 
 const options = { next: { revalidate: 30 } }
 
-export default async function IndexPage() {
-    const posts = await client.fetch<Post[]>(POSTS_QUERY, {}, options)
+export default async function ProjectsPage() {
+    const projects = await client.fetch<Project[]>(PROJECTS_QUERY, {}, options)
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
@@ -28,7 +33,6 @@ export default async function IndexPage() {
             <main className="py-16 px-4 sm:px-[10%] lg:px-[25%]">
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
-
                         <div className="flex flex-col gap-16 p-8">
                             <Link href="/">
                                 <Button variant="ghost" className={"text-gray-500"}>
@@ -37,18 +41,11 @@ export default async function IndexPage() {
                                 </Button>
                             </Link>
 
-                            <h1 className="text-4xl font-bold">Posts</h1>
+                            <h1 className="text-4xl font-bold">Projects</h1>
                             <ul className="flex flex-col gap-y-4">
-                                {posts.map((post) => {
-                                    const blog = {
-                                        ...post,
-                                        href: `/blog/${post.slug.current}`
-                                    }
-
-                                    return (
-                                        <BlogCard key={post._id} blog={blog} />
-                                    )
-                                })}
+                                {projects.map((project) => (
+                                    <ProjectCard key={project._id} project={project} />
+                                ))}
                             </ul>
                         </div>
                     </div>
