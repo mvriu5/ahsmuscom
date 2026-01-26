@@ -18,7 +18,7 @@ export default function ImprintPage() {
 
                     <div className="flex flex-col gap-16 p-8">
                         <Link href="/">
-                            <Button variant="ghost" className={"text-gray-500"}>
+                            <Button variant="ghost" size="xs" className={"text-gray-500"}>
                                 <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
                                 Back
                             </Button>
@@ -26,10 +26,18 @@ export default function ImprintPage() {
 
                         <div className="flex flex-col gap-4">
                             <h1 className="font-mono text-xl font-semibold">Imprint</h1>
-                            <div className="text-sm">
-                                <p>Marius Ahsmus</p>
-                                <p>Straße des 18. Oktober 15</p>
-                                <p>04103 Leipzig</p>
+                            <div className="text-sm space-y-6">
+                                <div>
+                                    <h2 className="text-base font-semibold mb-2">Information according to § 5 TMG</h2>
+                                    <p>Marius Ahsmus</p>
+                                    <p>Straße des 18. Oktober 15</p>
+                                    <p>04103 Leipzig</p>
+                                </div>
+                                <div>
+                                    <h2 className="text-base font-semibold mb-2">Contact</h2>
+                                    <p>Phone number: +4917680166904</p>
+                                    <p>E-Mail: marius.ahsmus@gmail.com</p>
+                                </div>
                             </div>
                         </div>
                     </div>

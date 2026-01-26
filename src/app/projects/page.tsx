@@ -35,7 +35,7 @@ export default async function ProjectsPage() {
                     <div className="border-t border-dashed border-border">
                         <div className="flex flex-col gap-16 p-8">
                             <Link href="/">
-                                <Button variant="ghost" className={"text-gray-500"}>
+                                <Button variant="ghost" size="xs" className={"text-gray-500"}>
                                     <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
                                     Back
                                 </Button>
