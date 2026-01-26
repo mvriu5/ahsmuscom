@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export function BlogCard({ blog }: { blog: { _id: string, title: string, description: string, href: string } }) {
     return (
-        <Card className="hover:bg-gray-50 transition-colors p-2 pr-4">
+        <Card className="hover:bg-gray-50 shadow-sm transition-colors p-2 pr-4">
             <CardContent className="flex items-center gap-2 px-0">
                 <div className="size-16 flex items-center justify-center bg-secondary/50 rounded-md ring ring-border shadow-sm">
                     <HugeiconsIcon icon={File01Icon} size={40} className="text-secondary-foreground/60"/>

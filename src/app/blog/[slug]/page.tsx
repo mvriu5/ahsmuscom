@@ -10,8 +10,10 @@ import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
 import { PostContent } from "@/components/post-content"
 import type { Metadata } from "next"
 import { FadeIn } from "@/components/fade-in"
+import { TableOfContents } from "@/components/table-of-contents"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
+const RECENT_POSTS_QUERY = `*[_type == "post" && slug.current != $slug] | order(publishedAt desc)[0...3]`
 
 const { projectId, dataset } = client.config()
 const urlFor = (source: SanityImageSource) =>
@@ -52,9 +54,14 @@ const options = { next: { revalidate: 30 } }
 
 export default async function Blog({params}: { params: Promise<{ slug: string }> }) {
     const post = await client.fetch<SanityDocument>(POST_QUERY, await params, options)
+    const recentPosts = await client.fetch<SanityDocument[]>(RECENT_POSTS_QUERY, await params, options)
     const postImageUrl = post.popoverImage
         ? urlFor(post.popoverImage)?.width(1920).height(1080).url()
         : null
+
+    const headings = post.detailedDescription.filter((block: any) =>
+        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(block.style)
+    )
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -81,7 +88,7 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
             '@type': 'WebPage',
             '@id': `https://ahsmus.com/blog/${post.slug.current}`,
         },
-    };
+    }
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
@@ -89,13 +96,13 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] lg:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
-            <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] lg:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
+            <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
+            <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
-            <div className="absolute top-0 bottom-0 left-0 pl-4 sm:pl-[10%] lg:pl-[25%] w-px border-r border-dashed border-border pointer-events-none" />
-            <div className="absolute top-0 bottom-0 right-0 pr-4 sm:pr-[10%] lg:pr-[25%] w-px border-l border-dashed border-border pointer-events-none" />
+            <div className="absolute top-0 bottom-0 left-0 pl-4 sm:pl-[10%] md:pl-[16%] lg:pl-[20%] w-px border-r border-dashed border-border pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 pr-4 sm:pr-[10%] md:pr-[16%] lg:pr-[20%] w-px border-l border-dashed border-border pointer-events-none" />
 
-            <main className="py-16 px-4 sm:px-[10%] lg:px-[25%]">
+            <main className="py-16 px-4 sm:px-[10%] md:px-[16%] lg:px-[20%]">
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
 
@@ -108,22 +115,27 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                             </Link>
 
                             {postImageUrl && (
-                                <div className="w-full h-32 overflow-hidden rounded-lg">
+                                <div className="w-full h-32 overflow-hidden rounded-lg ring ring-border shadow-sm">
                                     <Image
                                         src={postImageUrl}
                                         alt={post.title}
-                                        className="aspect-video rounded-xl"
+                                        className="aspect-video"
                                         width="1920"
                                         height="1080"
                                     />
                                 </div>
                             )}
-                            <div className="flex flex-col gap-4">
-                                <h1 className="text-5xl font-neuton">{post.title}</h1>
-                                <p className="text-sm text-muted-foreground font-mono">
-                                    Published: {new Date(post.publishedAt).toLocaleDateString()}
-                                </p>
-                                <PostContent body={post.detailedDescription} />
+                            <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+                                <div className="lg:col-span-1">
+                                    <TableOfContents headings={headings} />
+                                </div>
+                                <div className="lg:col-span-3 flex flex-col gap-4">
+                                    <h1 className="text-5xl font-neuton">{post.title}</h1>
+                                    <p className="text-sm text-muted-foreground font-mono">
+                                        Published: {new Date(post.publishedAt).toLocaleDateString()}
+                                    </p>
+                                    <PostContent body={post.detailedDescription} />
+                                </div>
                             </div>
                         </div>
                     </div>
