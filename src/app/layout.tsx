@@ -50,9 +50,9 @@ export const metadata: Metadata = {
         creator: "@mvriu5",
         images: [
             {
-                url: "https://ahsmus.com/opengraph_image.jpeg",
+                url: "https://ahsmus.com/twitter_image.jpeg",
                 alt: "Marius Ahsmus",
-                width: 2752,
+                width: 1536,
                 height: 1536,
             }
         ]
