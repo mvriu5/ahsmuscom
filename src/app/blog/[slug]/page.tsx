@@ -114,26 +114,27 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                                 </Button>
                             </Link>
 
-                            {postImageUrl && (
-                                <div className="w-full h-32 overflow-hidden rounded-lg ring ring-border shadow-sm">
-                                    <Image
-                                        src={postImageUrl}
-                                        alt={post.title}
-                                        className="aspect-video"
-                                        width="1920"
-                                        height="1080"
-                                    />
-                                </div>
-                            )}
+
                             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
                                 <div className="lg:col-span-1">
                                     <TableOfContents headings={headings} />
                                 </div>
-                                <div className="lg:col-span-3 flex flex-col gap-4">
-                                    <h1 className="text-5xl font-neuton">{post.title}</h1>
-                                    <p className="text-sm text-muted-foreground font-mono">
+                                <div className="lg:col-span-3 flex flex-col">
+                                    {postImageUrl && (
+                                        <div className="w-full h-40 overflow-hidden rounded-md ring-2 ring-border shadow-md mb-8">
+                                            <Image
+                                                src={postImageUrl}
+                                                alt={post.title}
+                                                className="aspect-video"
+                                                width="1920"
+                                                height="1080"
+                                            />
+                                        </div>
+                                    )}
+                                    <p className="text-xs text-muted-foreground font-mono">
                                         Published: {new Date(post.publishedAt).toLocaleDateString()}
                                     </p>
+                                    <h1 className="text-5xl font-neuton">{post.title}</h1>
                                     <PostContent body={post.detailedDescription} />
                                 </div>
                             </div>
