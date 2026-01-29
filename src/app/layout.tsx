@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     },
     description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
     openGraph: {
-        title: "Marius Ahsmus | Designer & Developer",
+        title: "Marius Ahsmus | Software Engineer",
         description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
         url: "https://ahsmus.com",
         type: "website",
@@ -35,20 +35,32 @@ export const metadata: Metadata = {
         siteName: "Marius Ahsmus",
         images: [
             {
-                url: "/opengraph-image",
-                width: 1200,
-                height: 630,
+                url: "https://ahsmus.com/opengraph_image.jpeg",
                 alt: "Marius Ahsmus",
-            },
-        ],
+                width: 2752,
+                height: 1536,
+            }
+        ]
     },
     twitter: {
         card: "summary_large_image",
         title: "Marius Ahsmus | Software Engineer",
         description: "Personal portfolio and blog of Marius Ahsmus, a software engineer based in Leipzig.",
+        site: "@mvriu5",
         creator: "@mvriu5",
-        images: ["/opengraph-image"],
+        images: [
+            {
+                url: "https://ahsmus.com/opengraph_image.jpeg",
+                alt: "Marius Ahsmus",
+                width: 2752,
+                height: 1536,
+            }
+        ]
     },
+    robots: {
+        index: true,
+        follow: true
+    }
 }
 
 export default function RootLayout({children}: Readonly<{ children: ReactNode }>) {
