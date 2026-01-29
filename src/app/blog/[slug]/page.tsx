@@ -126,7 +126,7 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                                                 src={postImageUrl}
                                                 alt={post.title}
                                                 width={1080}
-                                                height={330}st
+                                                height={330}
                                             />
                                         </div>
                                     )}
