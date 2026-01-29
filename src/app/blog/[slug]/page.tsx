@@ -121,13 +121,12 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                                 </div>
                                 <div className="lg:col-span-3 flex flex-col">
                                     {postImageUrl && (
-                                        <div className="w-full h-40 overflow-hidden rounded-md ring-2 ring-border shadow-md mb-8">
+                                        <div className="w-full h-52 overflow-hidden rounded-md ring-2 ring-border shadow-md mb-8">
                                             <Image
                                                 src={postImageUrl}
                                                 alt={post.title}
-                                                className="aspect-video"
-                                                width="1920"
-                                                height="1080"
+                                                width={1080}
+                                                height={330}
                                             />
                                         </div>
                                     )}
