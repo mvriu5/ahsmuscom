@@ -1,9 +1,14 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
 import { File01Icon, LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
+import { useState } from "react"
 
 export function BlogCard({ blog }: { blog: { _id: string, title: string, description: string, href: string } }) {
+    const [active, setActive] = useState(false)
+
     return (
         <Card className="hover:bg-gray-50 shadow-sm transition-colors p-2 pr-4">
             <CardContent className="flex items-center gap-2 px-0">
@@ -16,8 +21,13 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                         {blog.description}
                     </CardDescription>
                     <CardFooter className="justify-end items-end h-full px-0">
-                        <Link href={blog.href} className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
-                            <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
+                        <Link
+                            href={blog.href}
+                            prefetch={active ? true : false}
+                            onMouseEnter={() => setActive(true)}
+                            className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
+                        >
+                            <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500" />
                             Read Article
                         </Link>
                     </CardFooter>
