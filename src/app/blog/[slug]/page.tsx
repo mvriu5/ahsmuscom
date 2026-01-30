@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { notFound } from "next/navigation"
 import { type SanityDocument } from "next-sanity"
 import { client } from "@/sanity/lib/client"
 import type {SanityImageSource} from "@sanity/image-url/lib/types/types"
@@ -11,6 +12,7 @@ import { PostContent } from "@/components/post-content"
 import type { Metadata } from "next"
 import { FadeIn } from "@/components/fade-in"
 import { TableOfContents } from "@/components/table-of-contents"
+import { BlogCard } from "@/components/cards/blog-card"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
 const RECENT_POSTS_QUERY = `*[_type == "post" && slug.current != $slug] | order(publishedAt desc)[0...3]`
@@ -21,47 +23,49 @@ const urlFor = (source: SanityImageSource) =>
         ? createImageUrlBuilder({ projectId, dataset }).image(source)
         : null
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-    const post = await client.fetch<SanityDocument>(POST_QUERY, await params)
-
-    if (!post) {
-        return {
-            title: "Post not found",
-        }
-    }
-
-    return {
-        title: post.title,
-        description: post.description,
-        openGraph: {
-            title: post.title,
-            description: post.description,
-            type: 'article',
-            publishedTime: post.publishedAt,
-            url: `/blog/${post.slug.current}`,
-            images: [
-                {
-                    url: '',
-                    alt: post.title,
-                },
-            ],
-        },
-    }
+export async function generateStaticParams() {
+	const posts = await client.fetch<{ slug: { current: string } }[]>(`*[_type == "post" && defined(slug.current)]{ slug }`)
+	return posts.map(post => ({	slug: post.slug.current }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params
+	const post = await client.fetch<SanityDocument>(POST_QUERY, { slug })
+
+	if (!post) {
+		return {
+			title: "Post not found",
+		}
+	}
+
+	const ogImage = post.popoverImage
+		? urlFor(post.popoverImage)?.width(1200).height(630).url()
+		: undefined
+
+	return {
+		title: post.title,
+		description: post.description,
+		openGraph: {
+			title: post.title,
+			description: post.description,
+			type: "article",
+			publishedTime: post.publishedAt,
+			url: `/blog/${post.slug.current}`,
+			images: ogImage ? [{ url: ogImage, alt: post.title }] : []
+		}
+	}
+}
 
 const options = { next: { revalidate: 30 } }
 
-export default async function Blog({params}: { params: Promise<{ slug: string }> }) {
-    const post = await client.fetch<SanityDocument>(POST_QUERY, await params, options)
-    const recentPosts = await client.fetch<SanityDocument[]>(RECENT_POSTS_QUERY, await params, options)
-    const postImageUrl = post.popoverImage
-        ? urlFor(post.popoverImage)?.width(1920).height(1080).url()
-        : null
+export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+	const post = await client.fetch<SanityDocument>(POST_QUERY, { slug }, options)
+	if (!post) notFound()
 
-    const headings = post.detailedDescription.filter((block: any) =>
-        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(block.style)
-    )
+	const recentPosts = await client.fetch<SanityDocument[]>(RECENT_POSTS_QUERY, { slug }, options)
+    const postImageUrl = post.popoverImage ? urlFor(post.popoverImage)?.width(1920).height(1080).url() : null
+    const headings = post.detailedDescription.filter((block: any) => ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(block.style))
 
     const jsonLd = {
         '@context': 'https://schema.org',
@@ -135,6 +139,24 @@ export default async function Blog({params}: { params: Promise<{ slug: string }>
                                     </p>
                                     <h1 className="text-5xl font-neuton">{post.title}</h1>
                                     <PostContent body={post.detailedDescription} />
+
+                                    <div className="mt-16 border-t border-dashed border-border pt-8">
+                                        <h2 className="text-3xl font-neuton mb-4">Newest posts</h2>
+                                        {recentPosts && recentPosts.length > 0 ? (
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                                                {recentPosts.map((p) => (
+                                                    <BlogCard key={p._id} blog={{
+                                                        _id: p._id,
+                                                        title: p.title,
+                                                        description: p.description,
+                                                        href: `/blog/${p.slug.current}`
+                                                    }} />
+                                                ))}
+                                            </div>
+                                        ) : (
+                                            <p className="text-muted-foreground">No other posts found.</p>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </div>
