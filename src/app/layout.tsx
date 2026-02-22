@@ -68,7 +68,7 @@ export default function RootLayout({children}: Readonly<{ children: ReactNode }>
     return (
         <html lang="en" className={`${geistMono.variable} ${fontSans.variable} ${neuton.variable}`}>
             <body className={"antialiased"}>
-                <PlausibleProvider domain="ahsmus.com">
+                <PlausibleProvider domain="ahsmus.com" selfHosted customDomain="https://analytics.ahsmus.com">
                     <TooltipProvider>
                         {children}
                     </TooltipProvider>
