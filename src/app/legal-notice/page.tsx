@@ -2,10 +2,36 @@ import { Button } from "@/components/ui/button"
 import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
+import type { Metadata } from "next"
+import Script from "next/script"
+
+export const metadata: Metadata = {
+    title: "Legal Notice",
+    description: "Legal notice and contact information for Marius Ahsmus.",
+    alternates: {
+        canonical: "/legal-notice",
+    },
+}
 
 export default function ImprintPage() {
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Legal Notice",
+        description: "Legal notice and contact information for Marius Ahsmus.",
+        url: "https://ahsmus.com/legal-notice",
+        isPartOf: {
+            "@type": "WebSite",
+            name: "Marius Ahsmus",
+            url: "https://ahsmus.com",
+        },
+    }
+
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
+            <Script id="imprint-jsonld" strategy="afterInteractive" type="application/ld+json">
+                {JSON.stringify(jsonLd)}
+            </Script>
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
@@ -24,8 +50,8 @@ export default function ImprintPage() {
                             </Button>
                         </Link>
 
-                        <div className="flex flex-col gap-4">
-                            <h1 className="font-mono text-xl font-semibold">Imprint</h1>
+                        <div className="flex flex-col gap-8">
+                            <h1 className="font-neuton text-4xl">Legal Notice</h1>
                             <div className="text-sm space-y-6">
                                 <div>
                                     <h2 className="text-base font-semibold mb-2">Information according to § 5 TMG</h2>

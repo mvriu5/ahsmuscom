@@ -1,18 +1,19 @@
+import { BlogCard } from "@/components/cards/blog-card"
+import { FadeIn } from "@/components/fade-in"
+import { PostContent } from "@/components/post-content"
+import { TableOfContents } from "@/components/table-of-contents"
+import { Button } from "@/components/ui/button"
+import { client } from "@/sanity/lib/client"
+import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
+import { HugeiconsIcon } from "@hugeicons/react"
+import createImageUrlBuilder from "@sanity/image-url"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import type { Metadata } from "next"
+import { type SanityDocument } from "next-sanity"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { type SanityDocument } from "next-sanity"
-import { client } from "@/sanity/lib/client"
-import type {SanityImageSource} from "@sanity/image-url/lib/types/types"
-import createImageUrlBuilder from "@sanity/image-url"
-import { Button } from "@/components/ui/button"
-import { HugeiconsIcon } from "@hugeicons/react"
-import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
-import { PostContent } from "@/components/post-content"
-import type { Metadata } from "next"
-import { FadeIn } from "@/components/fade-in"
-import { TableOfContents } from "@/components/table-of-contents"
-import { BlogCard } from "@/components/cards/blog-card"
+import Script from "next/script"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
 const RECENT_POSTS_QUERY = `*[_type == "post" && slug.current != $slug] | order(publishedAt desc)[0...3]`
@@ -45,6 +46,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 	return {
 		title: post.title,
 		description: post.description,
+		keywords: Array.isArray(post.keywords)
+			? post.keywords.filter((keyword: unknown): keyword is string => typeof keyword === "string")
+			: undefined,
 		openGraph: {
 			title: post.title,
 			description: post.description,
@@ -85,7 +89,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             name: 'Marius Ahsmus',
             logo: {
                 '@type': 'ImageObject',
-                url: 'https://ahsmus.com/logo.png',
+                url: 'https://ahsmus.com/icon.svg',
             },
         },
         mainEntityOfPage: {
@@ -96,10 +100,9 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
+            <Script id={`blog-jsonld-${post._id}`} strategy="afterInteractive" type="application/ld+json">
+                {JSON.stringify(jsonLd)}
+            </Script>
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 

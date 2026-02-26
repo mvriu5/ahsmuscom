@@ -28,6 +28,16 @@ export const postType = defineType({
             validation: (rule) => rule.required(),
         }),
         defineField({
+            name: 'keywords',
+            title: 'Keywords',
+            type: 'array',
+            of: [{type: 'string'}],
+            options: {
+                layout: 'tags',
+            },
+            validation: (rule) => rule.unique(),
+        }),
+        defineField({
             name: 'popoverImage',
             type: 'image',
         }),

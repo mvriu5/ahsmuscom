@@ -6,6 +6,15 @@ import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
 import { BlogCard } from "@/components/cards/blog-card"
 import { FadeIn } from "@/components/fade-in"
 import { Post } from "@/sanity/lib/queries"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Blog Posts",
+    description: "Technical blog posts by Marius Ahsmus about software engineering, projects, and practical development insights.",
+    alternates: {
+        canonical: "/blog",
+    },
+}
 
 const POSTS_QUERY = `*[
   _type == "post"
@@ -16,9 +25,28 @@ const options = { next: { revalidate: 30 } }
 
 export default async function IndexPage() {
     const posts = await client.fetch<Post[]>(POSTS_QUERY, {}, options)
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Blog Posts",
+        description: "Technical blog posts by Marius Ahsmus about software engineering, projects, and practical development insights.",
+        url: "https://ahsmus.com/blog",
+        mainEntity: {
+            "@type": "ItemList",
+            itemListElement: posts.map((post, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                url: `https://ahsmus.com/blog/${post.slug.current}`,
+                name: post.title,
+            })),
+        },
+    }
 
     return (
-        <div className="relative min-h-screen max-w-screen font-sans">
+        <div className="relative min-h-screen max-w-screen font-sans">            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
@@ -37,8 +65,8 @@ export default async function IndexPage() {
                                 </Button>
                             </Link>
 
-                            <h1 className="text-4xl font-bold">Posts</h1>
-                            <ul className="flex flex-col gap-y-4">
+                            <h1 className="font-neuton text-4xl">Blog Posts</h1>
+                            <ul className="flex flex-col gap-y-4 -mt-8">
                                 {posts.map((post) => {
                                     const blog = {
                                         ...post,
@@ -57,3 +85,7 @@ export default async function IndexPage() {
         </div>
     )
 }
+
+
+
+

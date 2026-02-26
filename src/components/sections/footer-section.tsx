@@ -10,19 +10,21 @@ export function FooterSection() {
         <Section>
             <div className="w-full px-8 flex justify-between -mb-16">
                 <p className="w-full flex items-center gap-1 text-sm">
-                    <span>Made with</span>
+                    <span className="font-mono tracking-tighter text-xs">made with</span>
                     <HugeiconsIcon icon={FavouriteIcon} size={16} className="fill-red-500 text-red-500/50 animate-live"/>
-                    <span>in</span>
+                    <span className="font-mono tracking-tighter text-xs">in</span>
                     <Tooltip>
                         <TooltipTrigger>
-                            <Image src={"/leipzig.png"} alt="Leipzig" width={16} height={16}/>
+                            <Image src={"/leipzig.png"} alt="Leipzig" width={12} height={12} className="ml-1"/>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p className="">Leipzig [ˈlaɪ̯pt͡sɪç]</p>
+                            <p>Leipzig [ˈlaɪ̯pt͡sɪç]</p>
                         </TooltipContent>
                     </Tooltip>
                 </p>
-                <Link href={"/imprint"} className="py-8 text-sm text-end text-secondary-foreground/50 hover:text-foreground hover:underline">Imprint</Link>
+                <Link href={"/legal-notice"} className="py-8 text-sm text-end text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
+                    Legal Notice
+                </Link>
             </div>
         </Section>
     )

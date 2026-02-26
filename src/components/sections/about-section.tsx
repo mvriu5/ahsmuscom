@@ -13,23 +13,23 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 export function AboutSection() {
     const handleCopyEmail = () => {
         navigator.clipboard.writeText("marius.ahsmus@gmail.com")
-        toast.success("Email copied to clipboard")
+        toast.success("Email copied to clipboard", { position: "top-center" })
     }
 
     return (
         <Section title="01 About">
             <div className="flex gap-4">
-                <div className="shrink-0 bg-blue-500 size-22 rounded-xl outline outline-gray-300 border-3 border-gray-200 overflow-hidden">
+                <div className="shrink-0 size-22 rounded-xl outline outline-gray-300 border-3 border-gray-200 overflow-hidden">
                     <Image
-                        src="/King_Bumi.webp"
-                        alt="ProfilePciture"
-                        width={600}
-                        height={400}
-                        className="w-full h-full"
+                        src="/icon.svg"
+                        alt="Marius Ahsmus Logo Icon"
+                        width={300}
+                        height={300}
+                        className="w-full h-full p-2 -ml-1"
                     />
                 </div>
                 <div className="flex flex-col">
-                    <p className="text-2xl font-neuton">Marius Ahsmus</p>
+                    <h1 className="text-2xl font-neuton">Marius Ahsmus</h1>
                     <p className="text-sm text-secondary-foreground/75 font-semibold">Software Engineer</p>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"}>
@@ -42,12 +42,6 @@ export function AboutSection() {
                             <Button size={"xs"} variant={"outline"}>
                                 <XformerlyTwitter/>
                                 X / Twitter
-                            </Button>
-                        </Link>
-                        <Link href={"https://instagram.com/mvriu5"} rel="noopener noreferrer" target={"_blank"}>
-                            <Button size={"xs"} variant={"outline"}>
-                                <Instagram/>
-                                Instagram
                             </Button>
                         </Link>
                         <Tooltip>
