@@ -7,7 +7,6 @@ import { ProjectCard } from "@/components/cards/project-card"
 import { Project } from "@/sanity/lib/queries"
 import { FadeIn } from "@/components/fade-in"
 import type { Metadata } from "next"
-import Script from "next/script"
 
 export const metadata: Metadata = {
     title: "Projects",
@@ -50,9 +49,10 @@ export default async function ProjectsPage() {
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
-            <Script id="projects-jsonld" strategy="afterInteractive" type="application/ld+json">
-                {JSON.stringify(jsonLd)}
-            </Script>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
