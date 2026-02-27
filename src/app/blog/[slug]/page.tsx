@@ -13,7 +13,6 @@ import { type SanityDocument } from "next-sanity"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import Script from "next/script"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
 const RECENT_POSTS_QUERY = `*[_type == "post" && slug.current != $slug] | order(publishedAt desc)[0...3]`
@@ -100,9 +99,10 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
-            <Script id={`blog-jsonld-${post._id}`} strategy="afterInteractive" type="application/ld+json">
-                {JSON.stringify(jsonLd)}
-            </Script>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 
