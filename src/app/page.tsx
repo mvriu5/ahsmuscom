@@ -6,6 +6,7 @@ import { HeatmapSection } from "@/components/sections/heatmap-section"
 import { MapSection } from "@/components/sections/map-section"
 import { ProjectSection } from "@/components/sections/project-section"
 import { StackSection } from "@/components/sections/stack-section"
+import type { Metadata } from "next"
 import { type Activity } from "react-activity-calendar"
 
 type Contribution = {
@@ -14,8 +15,37 @@ type Contribution = {
     level: 0 | 1 | 2 | 3 | 4
 }
 
+export const metadata: Metadata = {
+    alternates: {
+        canonical: "/",
+    },
+}
+
 export default async function IndexPage() {
     let contributions: Activity[] = []
+    const jsonLd = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": "https://ahsmus.com/#person",
+                name: "Marius Ahsmus",
+                url: "https://ahsmus.com",
+                jobTitle: "Software Engineer",
+                sameAs: [
+                    "https://github.com/mvriu5",
+                    "https://x.com/mvriu5",
+                ],
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://ahsmus.com/#website",
+                url: "https://ahsmus.com",
+                name: "Marius Ahsmus",
+                inLanguage: "de-DE",
+            },
+        ],
+    }
 
     try {
         const username = "mvriu5"
@@ -68,6 +98,10 @@ export default async function IndexPage() {
 
     return (
         <div className="relative min-h-screen max-w-screen font-sans">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="absolute top-0 bottom-0 left-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
             <div className="absolute top-0 bottom-0 right-0 w-4 sm:w-[10%] md:w-[16%] lg:w-[20%] xl:w-[25%] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,var(--border)_10px,var(--border)_11px)] opacity-50 -z-10" />
 

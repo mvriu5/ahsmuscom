@@ -46,6 +46,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 	return {
 		title: post.title,
 		description: post.description,
+		alternates: {
+			canonical: `/blog/${post.slug.current}`,
+		},
 		keywords: Array.isArray(post.keywords)
 			? post.keywords.filter((keyword: unknown): keyword is string => typeof keyword === "string")
 			: undefined,
