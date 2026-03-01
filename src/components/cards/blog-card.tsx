@@ -15,12 +15,12 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                 <div className="shrink-0 size-14 flex items-center justify-center bg-secondary/50 rounded-md ring ring-border shadow-sm">
                     <HugeiconsIcon icon={File01Icon} size={40} className="text-secondary-foreground/60"/>
                 </div>
-                <div className="w-full flex flex-col">
-                    <CardTitle>{blog.title}</CardTitle>
-                    <CardDescription className="text-xs text-gray-600">
+                <div className="min-w-0 w-full flex flex-col">
+                    <CardTitle className="truncate">{blog.title}</CardTitle>
+                    <CardDescription className="mt-0.5 truncate text-xs text-gray-600">
                         {blog.description}
                     </CardDescription>
-                    <CardFooter className="justify-end items-end h-full px-0">
+                    <CardFooter className="mt-1 justify-end items-end px-0">
                         <Link
                             href={blog.href}
                             prefetch={active ? true : false}
