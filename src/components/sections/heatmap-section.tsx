@@ -14,14 +14,16 @@ export function HeatmapSection({ contributions }: { contributions: Activity[] })
                 <ActivityCalendar
                     data={contributions}
                     theme={minimalTheme}
+                    labels={{
+                        totalCount: "{{count}} contributions in the last year"
+                    }}
                     tooltips={{
                         activity: {
-
                             text: (activity: Activity) => `${activity.count} contributions on ${activity.date}`
                         },
                         colorLegend: {
-                              text: level => `Activity level ${level + 1}`
-                            },
+                            text: level => `Activity level ${level + 1}`
+                        },
                     }}
                 />
             </div>

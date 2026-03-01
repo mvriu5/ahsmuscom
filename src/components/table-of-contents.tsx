@@ -185,11 +185,11 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 					</div>
 					<ul
 						ref={mobileTocRef}
-						className="relative h-full overflow-y-auto border-l border-neutral-200 dark:border-neutral-700"
+						className="relative ml-px max-h-[calc(100vh-7rem)] overflow-y-auto border-l border-neutral-200 dark:border-neutral-700"
 					>
 						<div
 							className="absolute w-0.5 rounded-full bg-foreground transition-all duration-300 ease-in-out"
-							style={{ left: "-1.5px", ...barStyle }}
+							style={{ ...barStyle }}
 						/>
 						{headings.map(heading => {
 							const id = heading.children[0].text
