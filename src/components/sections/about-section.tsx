@@ -2,15 +2,32 @@
 
 import { Calendar01Icon, Mail01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
-import Link from "next/link"
 import Image from "next/image"
+import Link from "next/link"
 import { toast } from "sonner"
+import { TextMorph } from "torph/react"
 import { Section } from "../section"
-import { GitHub, Instagram, XformerlyTwitter } from "../svg-icons"
+import { GitHub, XformerlyTwitter } from "../svg-icons"
 import { Button } from "../ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import { useEffect, useState } from "react"
+
+const states = [
+    { label: "Software Engineer" },
+    { label: "Frontend Engineer" },
+    { label: "React Engineer" }
+]
 
 export function AboutSection() {
+    const [currentStateIndex, setCurrentStateIndex] = useState(0)
+
+     useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentStateIndex((prevIndex) => (prevIndex + 1) % states.length)
+        }, 4000)
+        return () => clearInterval(interval)
+     }, [])
+
     const handleCopyEmail = () => {
         navigator.clipboard.writeText("marius.ahsmus@gmail.com")
         toast.success("Email copied to clipboard", { position: "top-center" })
@@ -30,7 +47,9 @@ export function AboutSection() {
                 </div>
                 <div className="flex flex-col">
                     <h1 className="text-2xl font-neuton">Marius Ahsmus</h1>
-                    <p className="text-sm text-secondary-foreground/75 font-semibold">Software Engineer</p>
+                    <TextMorph className="text-sm text-secondary-foreground/75 font-semibold transition-[background,transform] duration-500 ease-in-out will-change-transform">
+                        {states[currentStateIndex].label}
+                    </TextMorph>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"}>
                             <Button size={"xs"} variant={"outline"}>
