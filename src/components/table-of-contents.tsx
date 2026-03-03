@@ -206,7 +206,10 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 								<li key={heading._key} id={`toc-${id}`}>
 									<a
 										href={`#${id}`}
-										onClick={() => isMobile && setIsOpen(false)}
+                                        onClick={() => {
+                                            trigger("soft")
+                                            if(isMobile) setIsOpen(false)
+                                        }}
 										className={cn(
 											"block py-1 pl-4 text-sm lg:text-xs text-muted-foreground transition-colors hover:text-foreground",
 											activeIds.includes(id) && "text-foreground",
