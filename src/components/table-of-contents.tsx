@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react"
 import { cn } from "@/utils/cn"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { TextAlignLeftIcon } from "@hugeicons/core-free-icons"
+import { useWebHaptics } from "web-haptics/react"
 
 interface TocEntry {
 	_key: string
@@ -49,7 +50,9 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 	const desktopTocRef = useRef<HTMLUListElement>(null)
 	const [barStyle, setBarStyle] = useState({ top: 0, height: 0, opacity: 0 })
 	const [isOpen, setIsOpen] = useState(false)
-	const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
+    const { trigger } = useWebHaptics()
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(max-width: 1023px)") // Tailwind's lg breakpoint
@@ -142,17 +145,20 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 			<div className="lg:hidden">
 				<div className="fixed top-4 left-6 z-40">
 					<button
-						onClick={() => setIsOpen(true)}
+                        onClick={() => {
+                            trigger("heavy")
+                            setIsOpen(true)
+                        }}
 						className="h-10 flex items-center justify-center gap-2 rounded-lg border bg-background/20 shadow-sm backdrop-blur-sm px-2"
 						aria-label="Open Table of Contents"
 					>
-					<HugeiconsIcon
-						icon={TextAlignLeftIcon}
-						size={14}
-						strokeWidth={3}
-						className="text-gray-600"
-					/>
-					<h3 className="font-semibold">Content</h3>
+    					<HugeiconsIcon
+    						icon={TextAlignLeftIcon}
+    						size={14}
+    						strokeWidth={3}
+    						className="text-gray-600"
+    					/>
+    					<h3 className="font-semibold">Content</h3>
 					</button>
 				</div>
 				{/* Overlay */}

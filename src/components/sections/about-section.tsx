@@ -11,6 +11,7 @@ import { GitHub, XformerlyTwitter } from "../svg-icons"
 import { Button } from "../ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { useEffect, useState } from "react"
+import { useWebHaptics } from "web-haptics/react"
 
 const states = [
     { label: "Software Engineer" },
@@ -20,6 +21,7 @@ const states = [
 
 export function AboutSection() {
     const [currentStateIndex, setCurrentStateIndex] = useState(0)
+    const { trigger } = useWebHaptics()
 
      useEffect(() => {
         const interval = setInterval(() => {
@@ -51,13 +53,13 @@ export function AboutSection() {
                         {states[currentStateIndex].label}
                     </TextMorph>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
-                        <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"}>
+                        <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
                             <Button size={"xs"} variant={"outline"}>
                                 <GitHub/>
                                 Github
                             </Button>
                         </Link>
-                        <Link href={"https://x.com/mvriu5"} rel="noopener noreferrer" target={"_blank"}>
+                        <Link href={"https://x.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
                             <Button size={"xs"} variant={"outline"}>
                                 <XformerlyTwitter/>
                                 X / Twitter
@@ -65,8 +67,14 @@ export function AboutSection() {
                         </Link>
                         <Tooltip>
                             <TooltipTrigger render={
-                                <Button size={"xs"} variant={"outline"} onClick={handleCopyEmail}>
-                                    <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5}/>
+                                <Button size={"xs"}
+                                    variant={"outline"}
+                                    onClick={() => {
+                                        trigger("success")
+                                        handleCopyEmail()
+                                    }}
+                                >
+                                    <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5} />
                                     Mail
                                 </Button>
                             }/>
@@ -74,7 +82,7 @@ export function AboutSection() {
                                 Click to copy email to clipboard
                             </TooltipContent>
                         </Tooltip>
-                        <Link href={"https://cal.com/mvriu5/15min"} rel="noopener noreferrer" target={"_blank"}>
+                        <Link href={"https://cal.com/mvriu5/15min"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
                             <Button
                                 size="xs"
                                 variant="outline"

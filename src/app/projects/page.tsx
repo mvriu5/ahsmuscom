@@ -1,11 +1,8 @@
-import Link from "next/link"
-import { client } from "@/sanity/lib/client"
-import { Button } from "@/components/ui/button"
-import { HugeiconsIcon } from "@hugeicons/react"
-import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
+import { BackButton } from "@/components/back-button"
 import { ProjectCard } from "@/components/cards/project-card"
-import { Project } from "@/sanity/lib/queries"
 import { FadeIn } from "@/components/fade-in"
+import { client } from "@/sanity/lib/client"
+import { Project } from "@/sanity/lib/queries"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -63,12 +60,7 @@ export default async function ProjectsPage() {
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
                         <div className="flex flex-col gap-16 p-8">
-                            <Link href="/">
-                                <Button variant="ghost" size="xs" className={"text-gray-500"}>
-                                    <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
-                                    Back
-                                </Button>
-                            </Link>
+                            <BackButton/>
 
                             <h1 className="font-neuton text-4xl">Projects</h1>
                             <ul className="flex flex-col gap-y-4 -mt-8">

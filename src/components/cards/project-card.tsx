@@ -1,11 +1,16 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
 import { cn } from "@/utils/cn"
 import { LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { Project } from "@/sanity/lib/queries"
+import { useWebHaptics } from "web-haptics/react"
 
 export function ProjectCard({ project }: { project: Project }) {
+    const { trigger } = useWebHaptics()
+
     return (
         <Card className="h-32 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-3 data-popup-open:cursor-default">
             <CardContent className="h-full flex items-center gap-2 px-0">
@@ -26,8 +31,14 @@ export function ProjectCard({ project }: { project: Project }) {
                 </div>
             </CardContent>
             <CardFooter className="justify-end items-end h-full px-0">
-                <Link href={project.link ?? ""} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all">
-                    <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
+                <Link
+                    href={project.link ?? ""}
+                    onClick={() => trigger("medium")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
+                >
+                    <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500" />
                     View Project
                 </Link>
             </CardFooter>

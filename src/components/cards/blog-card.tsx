@@ -5,9 +5,11 @@ import { File01Icon, LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"
 import { useState } from "react"
+import { useWebHaptics } from "web-haptics/react"
 
 export function BlogCard({ blog }: { blog: { _id: string, title: string, description: string, href: string } }) {
     const [active, setActive] = useState(false)
+    const { trigger } = useWebHaptics()
 
     return (
         <Card className="hover:bg-gray-50 shadow-sm transition-colors p-2 pr-4">
@@ -24,6 +26,7 @@ export function BlogCard({ blog }: { blog: { _id: string, title: string, descrip
                         <Link
                             href={blog.href}
                             prefetch={active ? true : false}
+                            onClick={() => trigger("medium")}
                             onMouseEnter={() => setActive(true)}
                             className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
                         >

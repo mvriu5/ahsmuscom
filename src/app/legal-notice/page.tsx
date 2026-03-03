@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button"
-import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/react"
-import Link from "next/link"
+import { BackButton } from "@/components/back-button"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -43,12 +40,7 @@ export default function ImprintPage() {
                 <div className="border-t border-dashed border-border">
 
                     <div className="flex flex-col gap-16 p-8">
-                        <Link href="/">
-                            <Button variant="ghost" size="xs" className={"text-gray-500"}>
-                                <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
-                                Back
-                            </Button>
-                        </Link>
+                        <BackButton/>
 
                         <div className="flex flex-col gap-8">
                             <h1 className="font-neuton text-4xl">Legal Notice</h1>

@@ -1,17 +1,14 @@
+import { BackButton } from "@/components/back-button"
 import { BlogCard } from "@/components/cards/blog-card"
 import { FadeIn } from "@/components/fade-in"
 import { PostContent } from "@/components/post-content"
 import { TableOfContents } from "@/components/table-of-contents"
-import { Button } from "@/components/ui/button"
 import { client } from "@/sanity/lib/client"
-import { ArrowTurnBackwardIcon } from "@hugeicons/core-free-icons"
-import { HugeiconsIcon } from "@hugeicons/react"
 import createImageUrlBuilder from "@sanity/image-url"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import type { Metadata } from "next"
 import { type SanityDocument } from "next-sanity"
 import Image from "next/image"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
@@ -117,14 +114,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
                     <div className="border-t border-dashed border-border">
 
                         <div className="flex flex-col gap-8 p-8">
-                            <Link href="/">
-                                <Button variant="ghost" size={"xs"} className={"text-gray-500"}>
-                                    <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
-                                    Back
-                                </Button>
-                            </Link>
-
-
+                            <BackButton/>
                             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
                                 <div className="lg:col-span-1">
                                     <TableOfContents headings={headings} />

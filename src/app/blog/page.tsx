@@ -7,6 +7,7 @@ import { BlogCard } from "@/components/cards/blog-card"
 import { FadeIn } from "@/components/fade-in"
 import { Post } from "@/sanity/lib/queries"
 import type { Metadata } from "next"
+import { BackButton } from "@/components/back-button"
 
 export const metadata: Metadata = {
     title: "Blog Posts",
@@ -43,7 +44,8 @@ export default async function IndexPage() {
     }
 
     return (
-        <div className="relative min-h-screen max-w-screen font-sans">            <script
+        <div className="relative min-h-screen max-w-screen font-sans">
+            <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
@@ -58,13 +60,7 @@ export default async function IndexPage() {
                     <div className="border-t border-dashed border-border">
 
                         <div className="flex flex-col gap-16 p-8">
-                            <Link href="/">
-                                <Button variant="ghost" size="xs" className={"text-gray-500"}>
-                                    <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
-                                    Back
-                                </Button>
-                            </Link>
-
+                            <BackButton/>
                             <h1 className="font-neuton text-4xl">Blog Posts</h1>
                             <ul className="flex flex-col gap-y-4 -mt-8">
                                 {posts.map((post) => {
@@ -85,7 +81,3 @@ export default async function IndexPage() {
         </div>
     )
 }
-
-
-
-

@@ -1,11 +1,16 @@
+"use client"
+
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip"
 import { FavouriteIcon } from "@hugeicons/core-free-icons"
 import Image from "next/image"
 import Link from "next/link"
 import { Section } from "../section"
+import { useWebHaptics } from "web-haptics/react"
 
 export function FooterSection() {
+    const { trigger } = useWebHaptics()
+
     return (
         <Section>
             <div className="w-full px-8 flex justify-between -mb-16">
@@ -22,7 +27,10 @@ export function FooterSection() {
                         </TooltipContent>
                     </Tooltip>
                 </p>
-                <Link href={"/legal-notice"} className="py-8 text-sm text-end text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
+                <Link
+                    href={"/legal-notice"}
+                    onClick={() => trigger("medium")}
+                    className="py-8 text-sm text-end text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
                     Legal Notice
                 </Link>
             </div>
