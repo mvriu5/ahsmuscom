@@ -59,10 +59,10 @@ export default async function ProjectsPage() {
             <main className="py-16 px-4 sm:px-[10%] md:px-[16%] lg:px-[20%] xl:px-[25%]">
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
-                        <div className="flex flex-col gap-16 p-8">
+                        <div className="flex flex-col gap-8 p-8">
                             <BackButton/>
 
-                            <h1 className="font-neuton text-4xl">Projects</h1>
+                            <h1 className="font-neuton text-4xl mb-8">Projects</h1>
                             <ul className="flex flex-col gap-y-4 -mt-8">
                                 {projects.map((project) => (
                                     <ProjectCard key={project._id} project={project} />

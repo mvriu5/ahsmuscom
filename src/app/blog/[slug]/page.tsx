@@ -113,7 +113,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
 
-                        <div className="flex flex-col gap-8 p-8">
+                        <div className="flex flex-col lg:gap-8 p-8">
                             <BackButton/>
                             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
                                 <div className="lg:col-span-1">
@@ -122,7 +122,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
                                 <div className="lg:col-span-3 flex flex-col">
                                     {postImageUrl && (
                                         <div
-                                            className="w-full h-40 overflow-hidden rounded-md ring ring-border shadow-sm mb-8"
+                                            className="w-full h-28 md:h-40 overflow-hidden rounded-md ring ring-border shadow-sm mb-8"
                                             style={{
                                                 WebkitMaskImage: "radial-gradient(140% 100% at 50% 50%, black 62%, transparent 100%)",
                                                 maskImage: "radial-gradient(140% 100% at 50% 50%, black 62%, transparent 100%)",

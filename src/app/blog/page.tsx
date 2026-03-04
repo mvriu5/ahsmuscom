@@ -59,9 +59,9 @@ export default async function IndexPage() {
                 <FadeIn>
                     <div className="border-t border-dashed border-border">
 
-                        <div className="flex flex-col gap-16 p-8">
+                        <div className="flex flex-col gap-8 p-8">
                             <BackButton/>
-                            <h1 className="font-neuton text-4xl">Blog Posts</h1>
+                            <h1 className="font-neuton text-4xl mb-8">Blog Posts</h1>
                             <ul className="flex flex-col gap-y-4 -mt-8">
                                 {posts.map((post) => {
                                     const blog = {

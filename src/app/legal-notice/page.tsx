@@ -39,7 +39,7 @@ export default function ImprintPage() {
 
                 <div className="border-t border-dashed border-border">
 
-                    <div className="flex flex-col gap-16 p-8">
+                    <div className="flex flex-col gap-8 p-8">
                         <BackButton/>
 
                         <div className="flex flex-col gap-8">
@@ -47,14 +47,14 @@ export default function ImprintPage() {
                             <div className="text-sm space-y-6">
                                 <div>
                                     <h2 className="text-base font-semibold mb-2">Information according to § 5 TMG</h2>
-                                    <p>Marius Ahsmus</p>
-                                    <p>Straße des 18. Oktober 15</p>
-                                    <p>04103 Leipzig</p>
+                                    <p className="font-mono tracking-tight">Marius Ahsmus</p>
+                                    <p className="font-mono tracking-tight">Straße des 18. Oktober 15</p>
+                                    <p className="font-mono tracking-tight">04103 Leipzig</p>
                                 </div>
                                 <div>
                                     <h2 className="text-base font-semibold mb-2">Contact</h2>
-                                    <p>Phone number: +4917680166904</p>
-                                    <p>E-Mail: marius.ahsmus@gmail.com</p>
+                                    <p className="font-mono tracking-tight">Phone number: +4917680166904</p>
+                                    <p className="font-mono tracking-tight">E-Mail: marius.ahsmus@gmail.com</p>
                                 </div>
                             </div>
                         </div>
