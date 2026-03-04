@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
-import { cn } from "@/utils/cn"
+import { cn } from "@/lib/utils"
 import { Location06Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import type {
@@ -154,66 +154,6 @@ function MapTileLayer({
     )
 }
 
-function MapLayers({
-    defaultTileLayer,
-    ...props
-}: Omit<React.ComponentProps<typeof MapLayersContext.Provider>, "value"> & {
-    defaultTileLayer?: string
-}) {
-    const [tileLayers, setTileLayers] = useState<MapTileLayerOption[]>([])
-    const [selectedTileLayer, setSelectedTileLayer] = useState<string>(
-        defaultTileLayer || ""
-    )
-    function registerTileLayer(tileLayer: MapTileLayerOption) {
-        setTileLayers((prevTileLayers) => {
-            if (prevTileLayers.some((layer) => layer.name === tileLayer.name)) {
-                return prevTileLayers
-            }
-            return [...prevTileLayers, tileLayer]
-        })
-    }
-
-    useEffect(() => {
-        // Error: Invalid defaultValue
-        if (
-            defaultTileLayer &&
-            tileLayers.length > 0 &&
-            !tileLayers.some((tileLayer) => tileLayer.name === defaultTileLayer)
-        ) {
-            throw new Error(
-                `Invalid defaultTileLayer "${defaultTileLayer}" provided to MapLayers. It must match a MapTileLayer's name prop.`
-            )
-        }
-
-        // Set initial selected tile layer
-        if (tileLayers.length > 0 && !selectedTileLayer) {
-            const validDefaultValue =
-                defaultTileLayer &&
-                tileLayers.some((layer) => layer.name === defaultTileLayer)
-                    ? defaultTileLayer
-                    : tileLayers[0].name
-            //eslint-disable-next-line
-            setSelectedTileLayer(validDefaultValue)
-        }
-    }, [
-        tileLayers,
-        defaultTileLayer,
-        selectedTileLayer
-    ])
-
-    return (
-        <MapLayersContext.Provider
-            value={{
-                registerTileLayer,
-                tileLayers,
-                selectedTileLayer,
-                setSelectedTileLayer,
-            }}
-            {...props}
-        />
-    )
-}
-
 function MapMarker({
     icon = <HugeiconsIcon icon={Location06Icon} className="size-8 text-destructive fill-destructive/40"/>,
     iconAnchor = [12, 12],
@@ -242,21 +182,6 @@ function MapMarker({
                 ...(tooltipAnchor ? { tooltipAnchor } : {}),
             })}
             riseOnHover
-            {...props}
-        />
-    )
-}
-
-function MapPopup({
-    className,
-    ...props
-}: Omit<PopupProps, "content"> & { ref?: Ref<Popup> }) {
-    return (
-        <LeafletPopup
-            className={cn(
-                "bg-popover text-popover-foreground animate-in fade-out-0 fade-in-0 zoom-out-95 zoom-in-95 slide-in-from-bottom-2 z-50 w-72 rounded-md border p-4 font-sans shadow-md outline-hidden",
-                className
-            )}
             {...props}
         />
     )
@@ -348,11 +273,7 @@ function useLeaflet() {
 
 export {
     Map,
-    MapControlContainer,
-    MapLayers,
     MapMarker,
-    MapPopup,
     MapTileLayer,
     MapZoomControl,
-    useLeaflet
 }

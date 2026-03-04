@@ -3,12 +3,12 @@ import { BlogCard } from "@/components/cards/blog-card"
 import { FadeIn } from "@/components/fade-in"
 import { PostContent } from "@/components/post-content"
 import { TableOfContents } from "@/components/table-of-contents"
+import { AsciiArt } from "@/components/ui/ascii-art"
 import { client } from "@/sanity/lib/client"
 import createImageUrlBuilder from "@sanity/image-url"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import type { Metadata } from "next"
 import { type SanityDocument } from "next-sanity"
-import Image from "next/image"
 import { notFound } from "next/navigation"
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`
@@ -121,12 +121,22 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
                                 </div>
                                 <div className="lg:col-span-3 flex flex-col">
                                     {postImageUrl && (
-                                        <div className="w-full h-52 overflow-hidden rounded-md ring-2 ring-border shadow-md mb-8">
-                                            <Image
+                                        <div
+                                            className="w-full h-40 overflow-hidden rounded-md ring ring-border shadow-sm mb-8"
+                                            style={{
+                                                WebkitMaskImage: "radial-gradient(140% 100% at 50% 50%, black 62%, transparent 100%)",
+                                                maskImage: "radial-gradient(140% 100% at 50% 50%, black 62%, transparent 100%)",
+                                            }}
+                                        >
+                                            <AsciiArt
                                                 src={postImageUrl}
-                                                alt={post.title}
-                                                width={1080}
-                                                height={330}
+                                                resolution={180}
+                                                charset="standard"
+                                                animationStyle="typewriter"
+                                                animated={false}
+                                                color="#2b7fff"
+                                                backgroundColor="var(--background)"
+                                                className="w-full h-full"
                                             />
                                         </div>
                                     )}

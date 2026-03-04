@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardDescription, CardFooter, CardTitle } from "@/components/ui/card"
-import { cn } from "@/utils/cn"
+import { cn } from "@/lib/utils"
 import { LinkSquare02Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Link from "next/link"

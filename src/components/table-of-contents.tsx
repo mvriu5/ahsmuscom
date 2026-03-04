@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useRef } from "react"
-import { cn } from "@/utils/cn"
+import { cn } from "@/lib/utils"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { TextAlignLeftIcon } from "@hugeicons/core-free-icons"
 import { useWebHaptics } from "web-haptics/react"

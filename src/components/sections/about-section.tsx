@@ -12,6 +12,7 @@ import { Button } from "../ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { useEffect, useState } from "react"
 import { useWebHaptics } from "web-haptics/react"
+import { AsciiArt } from "../ui/ascii-art"
 
 const states = [
     { label: "Software Engineer" },
@@ -38,13 +39,21 @@ export function AboutSection() {
     return (
         <Section title="01 About">
             <div className="flex gap-4">
-                <div className="shrink-0 size-22 rounded-xl outline outline-gray-300 border-3 border-gray-200 overflow-hidden">
+                <div className="group relative shrink-0 size-22 rounded-xl outline outline-gray-300 border-3 border-gray-200 overflow-hidden">
                     <Image
                         src="/icon.svg"
                         alt="Marius Ahsmus Logo Icon"
                         width={300}
                         height={300}
-                        className="w-full h-full p-2 -ml-1"
+                        className="absolute inset-0 w-full h-full p-2 -ml-1 transition-opacity duration-300 group-hover:opacity-0"
+                    />
+                    <AsciiArt
+                        src="/icon.svg"
+                        resolution={50}
+                        charset="blocks"
+                        color="#2b7fff"
+                        animationStyle="typewriter"
+                        className="absolute inset-1.25 w-[80%] h-[80%] mt-0.75 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     />
                 </div>
                 <div className="flex flex-col">
