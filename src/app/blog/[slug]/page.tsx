@@ -166,7 +166,7 @@ export default async function Blog({
                 <div className="mt-16 border-t border-dashed border-border pt-8">
                   <h2 className="text-3xl font-neuton mb-4">Newest posts</h2>
                   {recentPosts && recentPosts.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                    <div className="flex flex-col gap-8">
                       {recentPosts.map((p) => (
                         <BlogCard
                           key={p._id}

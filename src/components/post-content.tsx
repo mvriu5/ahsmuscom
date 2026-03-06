@@ -1,12 +1,32 @@
 "use client"
 
 import { PortableText, type PortableTextComponents } from "@portabletext/react"
+import type { ComponentType } from "react"
+import { SeoChart } from "@/components/blog-blocks/seo-chart"
 import { CodeBlock } from "@/components/code-block"
+
+interface ReactComponentBlockValue {
+    component?: string
+}
+
+const reactComponentMap: Record<string, ComponentType> = {
+    seochart: SeoChart,
+}
 
 const portableTextComponents: PortableTextComponents = {
     types: {
         // @ts-ignore
         code: CodeBlock,
+        reactComponent: ({ value }: { value: ReactComponentBlockValue }) => {
+            const key = value?.component?.toLowerCase()
+            const Component = key ? reactComponentMap[key] : undefined
+
+            if (!Component) {
+                return null
+            }
+
+            return <Component />
+        },
     },
     block: {
         h1: ({ children }) => <h1 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} className="text-3xl font-neuton my-4">{children}</h1>,
