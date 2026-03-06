@@ -20,8 +20,9 @@ import {
     Upstash,
     Vercel
 } from "../svg-icons"
-import { Button } from "../ui/button"
+import { Button, buttonVariants } from "../ui/button"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import { cn } from "@/lib/utils"
 
 const stack = [
     { name: "Next.js", icon: Nextjs, url: "https://nextjs.org/", description: "The React framework for production. I use it for all my projects." },
@@ -52,18 +53,17 @@ export function StackSection() {
             <div className="flex flex-wrap gap-2">
                 {stack.map((tech) => (
                     <Tooltip key={tech.url}>
-                        <TooltipTrigger delay={2000} render={
+                        <TooltipTrigger delay={2000}>
                             <Link
                                 href={tech.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                className={cn(buttonVariants({ variant: "outline", size: "xs" }))}
                             >
-                                <Button variant="outline" size="xs">
                                     <tech.icon className="h-6 w-6" />
                                     {tech.name}
-                                </Button>
                             </Link>
-                        }/>
+                        </TooltipTrigger>
                         <TooltipContent>
                             <p>{tech.description}</p>
                         </TooltipContent>

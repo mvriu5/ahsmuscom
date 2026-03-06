@@ -16,7 +16,7 @@ export function FooterSection() {
 
     return (
         <Section>
-            <div className="w-full px-8 flex items-center justify-between -mb-16">
+            <div className="w-full p-8 flex items-center justify-between -mb-16">
                 <div className="flex flex-col gap-2">
                     <p className="w-full flex items-center gap-1 text-sm">
                         <span className="font-mono tracking-tighter text-xs">made with</span>
@@ -45,7 +45,7 @@ export function FooterSection() {
                 <Link
                     href={"/legal-notice"}
                     onClick={() => trigger("medium")}
-                    className="py-8 text-sm text-end text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
+                    className="self-start text-sm text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
                     Legal Notice
                 </Link>
             </div>
