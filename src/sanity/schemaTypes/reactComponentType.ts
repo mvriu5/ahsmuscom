@@ -10,8 +10,13 @@ export const reactComponentType = defineType({
       title: "Component",
       type: "string",
       options: {
-        list: [{ title: "SEO Chart", value: "seochart" }],
-      },
+          list: [
+              { title: "Crawl Animation", value: "crawlanimation" },
+              { title: "Rendering Differences", value: "renderinganimation" },
+              { title: "CWV Animation", value: "cwvanimation" },
+              { title: "Responsiveness Animation", value: "responsivenessanimation" }
+            ],
+        },
       validation: (rule) => rule.required(),
     }),
   ],

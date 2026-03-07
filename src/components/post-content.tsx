@@ -2,7 +2,10 @@
 
 import { PortableText, type PortableTextComponents } from "@portabletext/react"
 import type { ComponentType } from "react"
-import { SeoChart } from "@/components/blog-blocks/seo-chart"
+import { CrawlAnimation } from "@/components/animations/crawl-animation"
+import { RenderingAnimation } from "@/components/animations/rendering-animation"
+import { CwvAnimation } from "@/components/animations/cwv-animation"
+import { ResponsivenessAnimation } from "@/components/animations/responsiveness-animation"
 import { CodeBlock } from "@/components/code-block"
 
 interface ReactComponentBlockValue {
@@ -10,7 +13,10 @@ interface ReactComponentBlockValue {
 }
 
 const reactComponentMap: Record<string, ComponentType> = {
-    seochart: SeoChart,
+    crawlanimation: CrawlAnimation,
+    renderinganimation: RenderingAnimation,
+    cwvanimation: CwvAnimation,
+    responsivenessanimation: ResponsivenessAnimation,
 }
 
 const portableTextComponents: PortableTextComponents = {
@@ -32,7 +38,7 @@ const portableTextComponents: PortableTextComponents = {
         h1: ({ children }) => <h1 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} className="text-3xl font-neuton my-4">{children}</h1>,
         h2: ({ children }) => <h2 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} className="text-2xl font-neuton my-3">{children}</h2>,
         h3: ({ children }) => <h3 id={children?.toString().toLowerCase().replace(/\s+/g, '-')} className="text-xl font-neuton my-2">{children}</h3>,
-        normal: ({ children }) => <p className="text-secondary-foreground/80 text-base">{children}</p>,
+        normal: ({ children }) => <p className="text-secondary-foreground/80 text-base text-pretty">{children}</p>,
         blockquote: ({ children }) => (
             <blockquote className="border-l-4 border-muted-foreground/50 pl-4 italic my-4">
                 {children}
