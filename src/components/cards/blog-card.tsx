@@ -1,18 +1,18 @@
 "use client";
 
-import { Book02Icon, File01Icon, LinkSquare02Icon } from "@hugeicons/core-free-icons";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardTitle,
+} from "@/components/ui/card";
+import { LinkSquare02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import Link from "next/link";
-import { useWebHaptics } from "web-haptics/react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardTitle,
-} from "@/components/ui/card";
-import { BookTextIcon, BookTextIconHandle } from "../ui/book-text";
 import { useRef } from "react";
+import { useWebHaptics } from "web-haptics/react";
+import { BookTextIcon, BookTextIconHandle } from "../ui/book-text";
 
 export function BlogCard({
   blog,
