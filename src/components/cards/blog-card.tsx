@@ -45,7 +45,7 @@ export function BlogCard({
             <Link
               href={blog.href}
               onClick={() => trigger("medium")}
-              className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
+              className="group flex items-center justify-end gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all active:scale-98"
             >
               <HugeiconsIcon
                 icon={LinkSquare02Icon}

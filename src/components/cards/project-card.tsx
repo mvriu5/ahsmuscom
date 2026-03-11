@@ -36,7 +36,7 @@ export function ProjectCard({ project }: { project: Project }) {
                     onClick={() => trigger("medium")}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
+                    className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all active:scale-98"
                 >
                     <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500" />
                     View Project

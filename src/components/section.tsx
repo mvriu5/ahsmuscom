@@ -25,7 +25,7 @@ export function Section({ title, link, children }: SectionProps) {
                     <Link
                         href={link}
                         onClick={() => trigger("medium")}
-                        className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all"
+                        className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all active:scale-98"
                     >
                         <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
                         See all

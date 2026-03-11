@@ -45,7 +45,7 @@ export function FooterSection() {
                 <Link
                     href={"/legal-notice"}
                     onClick={() => trigger("medium")}
-                    className="self-start text-sm text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline">
+                    className="self-start text-sm text-nowrap text-secondary-foreground/50 hover:text-foreground hover:underline active:scale-98">
                     Legal Notice
                 </Link>
             </div>

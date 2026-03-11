@@ -63,20 +63,22 @@ export function AboutSection() {
                     </TextMorph>
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
-                            <Button size={"xs"} variant={"outline"}>
+                            <Button size={"xs"} variant={"outline"} className={"active:scale-98"}>
                                 <GitHub/>
                                 Github
                             </Button>
                         </Link>
                         <Link href={"https://x.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
-                            <Button size={"xs"} variant={"outline"}>
+                            <Button size={"xs"} variant={"outline"} className={"active:scale-98"}>
                                 <XformerlyTwitter/>
                                 X / Twitter
                             </Button>
                         </Link>
                         <Tooltip>
                             <TooltipTrigger render={
-                                <Button size={"xs"}
+                                <Button
+                                    size={"xs"}
+                                    className={"active:scale-98"}
                                     variant={"outline"}
                                     onClick={() => {
                                         trigger("success")
@@ -95,7 +97,7 @@ export function AboutSection() {
                             <Button
                                 size="xs"
                                 variant="outline"
-                                className="bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200"
+                                className="bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200 active:scale-98"
                             >
                                 <HugeiconsIcon icon={Calendar01Icon} />
                                 Book a call

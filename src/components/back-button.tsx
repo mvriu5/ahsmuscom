@@ -10,7 +10,7 @@ export function BackButton() {
     const { trigger } = useWebHaptics()
 
     return (
-        <Link href="/" onClick={() => trigger("medium")}>
+        <Link href="/" onClick={() => trigger("medium")} className="w-max active:scale-98">
             <Button variant="ghost" size="xs" className={"text-gray-500"}>
                 <HugeiconsIcon icon={ArrowTurnBackwardIcon} strokeWidth={2.5} className="text-gray-500 mt-0.5"/>
                 Back
