@@ -969,7 +969,7 @@ const Figma = (props: SVGProps<SVGSVGElement>) => (
 
 export {
     BetterAuth,
-    Biomejs, Docker, DrizzleORM, ESLint, Figma, Git, GitHub, Motion, Nextjs, Playwright, Polar,
+    Docker, DrizzleORM, ESLint, Figma, Git, GitHub, Motion, Nextjs, Playwright, Polar,
     PostgreSQL, ReactIcon, Redis,
     Resend, TailwindCSS, TypeScript, Vercel, Vite, XformerlyTwitter
 }

@@ -1,5 +1,5 @@
 import createImageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { SanityDocument } from "next-sanity";

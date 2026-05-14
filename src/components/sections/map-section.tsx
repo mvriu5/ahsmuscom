@@ -1,27 +1,21 @@
-import {
-    Map,
-    MapMarker,
-    MapTileLayer,
-    MapZoomControl,
-} from "@/components/ui/map"
+"use client"
+
+import dynamic from "next/dynamic"
 import { Section } from "../section"
+
+const LocationMap = dynamic(
+    async () => (await import("./map-section-map")).LocationMap,
+    {
+        ssr: false,
+        loading: () => <div className="h-full w-full bg-muted" />,
+    }
+)
 
 export function MapSection() {
     return (
         <Section title="06 Location">
             <div className="h-48 md:h-68 overflow-hidden rounded-md border border-border">
-                <div className="h-full md:hidden">
-                    <Map center={[48.55, 12.376]} zoom={5}>
-                        <MapTileLayer />
-                        <MapMarker position={[51.347, 12.376]} />
-                    </Map>
-                </div>
-                <div className="hidden h-full md:block">
-                    <Map center={[49.927, 12.376]} zoom={5}>
-                        <MapTileLayer />
-                        <MapMarker position={[51.347, 12.376]} />
-                    </Map>
-                </div>
+                <LocationMap />
             </div>
         </Section>
     )

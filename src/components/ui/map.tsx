@@ -3,22 +3,16 @@
 import { Button } from "@/components/ui/button"
 import { ButtonGroup } from "@/components/ui/button-group"
 import { cn } from "@/lib/utils"
-import { Location06Icon } from "@hugeicons/core-free-icons"
+import { Location06Icon, MinusSignIcon, PlusSignIcon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import type {
     DivIconOptions,
     LatLngExpression,
     Map as LeafletMap,
     Marker,
-    Popup,
     TileLayer
 } from "leaflet"
 import "leaflet/dist/leaflet.css"
-import {
-    MinusIcon,
-    PlusIcon
-} from "lucide-react"
-import { useTheme } from "next-themes"
 import dynamic from "next/dynamic"
 import {
     createContext,
@@ -35,10 +29,9 @@ import {
     useMapEvents,
     type MapContainerProps,
     type MarkerProps,
-    type PopupProps,
     type TileLayerProps
 } from "react-leaflet"
-import "react-leaflet-markercluster/styles"
+import "react-leaflet-markercluster"
 
 const LeafletMapContainer = dynamic(
     async () => (await import("react-leaflet")).MapContainer,
@@ -120,16 +113,8 @@ function MapTileLayer({
     const DEFAULT_DARK_URL =
         "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
 
-    const { resolvedTheme } = useTheme()
-    const resolvedUrl =
-        resolvedTheme === "dark"
-            ? (darkUrl ?? url ?? DEFAULT_DARK_URL)
-            : (url ?? DEFAULT_URL)
-    const resolvedAttribution =
-        resolvedTheme === "dark" && darkAttribution
-            ? darkAttribution
-            : (attribution ??
-              '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>')
+    const resolvedUrl = (darkUrl ?? url ?? DEFAULT_DARK_URL)
+    const resolvedAttribution = darkAttribution ?? (attribution ?? '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>')
 
     useEffect(() => {
         if (context) {
@@ -212,7 +197,7 @@ function MapZoomControl({ className, ...props }: React.ComponentProps<"div">) {
                     className="border"
                     disabled={zoomLevel >= map.getMaxZoom()}
                     onClick={() => map.zoomIn()}>
-                    <PlusIcon />
+                    <HugeiconsIcon icon={PlusSignIcon} />
                 </Button>
                 <Button
                     type="button"
@@ -223,7 +208,7 @@ function MapZoomControl({ className, ...props }: React.ComponentProps<"div">) {
                     className="border"
                     disabled={zoomLevel <= map.getMinZoom()}
                     onClick={() => map.zoomOut()}>
-                    <MinusIcon />
+                    <HugeiconsIcon icon={MinusSignIcon} />
                 </Button>
             </ButtonGroup>
         </MapControlContainer>
@@ -275,5 +260,5 @@ export {
     Map,
     MapMarker,
     MapTileLayer,
-    MapZoomControl,
+    MapZoomControl
 }

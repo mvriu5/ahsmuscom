@@ -1,4 +1,5 @@
 import type { NextConfig } from "next"
+import { withPlausibleProxy } from "next-plausible"
 
 const nextConfig: NextConfig = {
     reactCompiler: true,
@@ -10,4 +11,6 @@ const nextConfig: NextConfig = {
     }
 }
 
-export default nextConfig
+export default withPlausibleProxy({
+    src: "https://analytics.ahsmus.com/js/script.js",
+})(nextConfig)
