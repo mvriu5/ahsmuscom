@@ -19,7 +19,7 @@ export function Section({ title, link, children }: SectionProps) {
         <div className="w-full flex flex-col gap-4 border-t border-dashed border-border">
             <div className="px-8 w-full flex items-center gap-2 justify-between border-b border-dashed border-border">
                 {title &&
-                    <h2 className="text-4xl text-foreground/85 font-neuton p-2 -ml-2">{title}</h2>
+                    <h2 className="text-4xl text-foreground/90 font-neuton p-2 -ml-2">{title}</h2>
                 }
                 {link &&
                     <Link
@@ -28,7 +28,6 @@ export function Section({ title, link, children }: SectionProps) {
                         className="group flex items-center gap-1 text-xs text-gray-700 hover:text-blue-500 transition-all active:scale-98"
                     >
                         <HugeiconsIcon icon={LinkSquare02Icon} size={12} className="text-gray-500 group-hover:text-blue-500"/>
-                        See all
                     </Link>
                 }
             </div>

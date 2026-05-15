@@ -15,14 +15,19 @@ export function ProjectCard({ project }: { project: Project }) {
         <Card className="h-32 flex flex-col justify-between hover:bg-gray-50 transition-colors shadow-sm p-3 data-popup-open:cursor-default">
             <CardContent className="h-full flex items-center gap-2 px-0">
                 <div className="flex flex-col">
-                    <div className="flex items-center gap-2 mb-2">
+                    <div
+                        className={cn(
+                            "flex items-center gap-2 mb-2 px-2 w-max rounded-sm border",
+                            project.live ? "bg-green-500/5 border-green-200/50" : "bg-red-500/5 border-red-200/50"
+                        )}
+                    >
                         <div
                             className={cn(
-                                "rounded-full size-2 outline-2 animate-live",
+                                "rounded-full size-1.75 outline-2 animate-live",
                                 project.live ? "bg-green-500 outline-green-500/40" : "bg-red-500 outline-red-500/40"
                             )}
                         />
-                        <p className={cn("text-xs font-mono", project.live ? "text-green-600" : "text-red-600")}>{project.live ? "Online" : "Dead"}</p>
+                        <p className={cn("text-[11px] font-mono", project.live ? "text-green-600" : "text-red-600")}>{project.live ? "Online" : "Dead"}</p>
                     </div>
                     <CardTitle>{project.title}</CardTitle>
                     <CardDescription className="text-xs text-gray-600">
