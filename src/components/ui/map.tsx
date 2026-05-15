@@ -45,20 +45,8 @@ const LeafletMarker = dynamic(
     async () => (await import("react-leaflet")).Marker,
     { ssr: false }
 )
-const LeafletPopup = dynamic(
-    async () => (await import("react-leaflet")).Popup,
-    { ssr: false }
-)
 
-function Map({
-    zoom = 15,
-    maxZoom = 18,
-    className,
-    ...props
-}: Omit<MapContainerProps, "zoomControl"> & {
-    center: LatLngExpression
-    ref?: Ref<LeafletMap>
-}) {
+function Map({ zoom = 15, maxZoom = 18, className, ...props }: Omit<MapContainerProps, "zoomControl"> & { center: LatLngExpression, ref?: Ref<LeafletMap> }) {
     return (
         <LeafletMapContainer
             zoom={zoom}
@@ -89,46 +77,28 @@ interface MapLayersContextType {
 
 const MapLayersContext = createContext<MapLayersContextType | null>(null)
 
-function MapTileLayer({
-    name = "Default",
-    url,
-    attribution,
-    darkUrl,
-    darkAttribution,
-    ...props
-}: Partial<TileLayerProps> & {
-    name?: string
-    darkUrl?: string
-    darkAttribution?: string
-    ref?: Ref<TileLayer>
-}) {
+function MapTileLayer({ name = "Default", ...props }: Partial<TileLayerProps> & { name?: string, ref?: Ref<TileLayer> }) {
     const map = useMap()
     if (map.attributionControl) {
         map.attributionControl.setPrefix("")
     }
 
     const context = useContext(MapLayersContext)
-    const DEFAULT_URL =
-        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
-    const DEFAULT_DARK_URL =
-        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
 
-    const resolvedUrl = (darkUrl ?? url ?? DEFAULT_DARK_URL)
-    const resolvedAttribution = darkAttribution ?? (attribution ?? '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>')
+    const resolvedUrl =  "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+    const resolvedAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attributions">CARTO</a>'
 
     useEffect(() => {
-        if (context) {
-            context.registerTileLayer({
-                name,
-                url: resolvedUrl,
-                attribution: resolvedAttribution,
-            })
-        }
-    }, [context, name, url, attribution, resolvedAttribution, resolvedUrl])
+        if (!context) return
 
-    if (context && context.selectedTileLayer !== name) {
-        return null
-    }
+        context.registerTileLayer({
+            name,
+            url: resolvedUrl,
+            attribution: resolvedAttribution,
+        })
+    }, [context, name, resolvedAttribution, resolvedUrl])
+
+    if (context && context.selectedTileLayer !== name) return null
 
     return (
         <LeafletTileLayer
@@ -147,10 +117,7 @@ function MapMarker({
     tooltipAnchor,
     ...props
 }: Omit<MarkerProps, "icon"> &
-    Pick<
-        DivIconOptions,
-        "iconAnchor" | "bgPos" | "popupAnchor" | "tooltipAnchor"
-    > & {
+    Pick<DivIconOptions, "iconAnchor" | "bgPos" | "popupAnchor" | "tooltipAnchor"> & {
         icon?: ReactNode
         ref?: Ref<Marker>
     }) {
@@ -215,10 +182,7 @@ function MapZoomControl({ className, ...props }: React.ComponentProps<"div">) {
     )
 }
 
-function MapControlContainer({
-    className,
-    ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+function MapControlContainer({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
     const { L } = useLeaflet()
     const containerRef = useRef<HTMLDivElement>(null)
 

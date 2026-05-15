@@ -14,7 +14,7 @@ export function LocationMap() {
                     <MapTileLayer />
                     <MapMarker position={[51.347, 12.376]} />
                 </Map>
-            </div>
+            </div>map
             <div className="hidden h-full md:block">
                 <Map center={[49.927, 12.376]} zoom={5}>
                     <MapTileLayer />
