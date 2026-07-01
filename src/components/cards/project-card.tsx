@@ -30,9 +30,7 @@ export function ProjectCard({ project }: { project: Project }) {
                         <p className={cn("text-[11px] font-mono", project.live ? "text-green-600" : "text-red-600")}>{project.live ? "Online" : "Dead"}</p>
                     </div>
                     <CardTitle>{project.title}</CardTitle>
-                    <CardDescription className="text-xs text-gray-600">
-                        {project.description}
-                    </CardDescription>
+                    <CardDescription className="text-xs text-gray-600">{project.description}</CardDescription>
                 </div>
             </CardContent>
             <CardFooter className="justify-end items-end h-full px-0">

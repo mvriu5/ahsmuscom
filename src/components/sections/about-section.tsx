@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar01Icon, Mail01Icon } from "@hugeicons/core-free-icons"
+import { Mail01Icon } from "@hugeicons/core-free-icons"
 import { HugeiconsIcon } from "@hugeicons/react"
 import Image from "next/image"
 import Link from "next/link"
@@ -14,22 +14,18 @@ import { useEffect, useState } from "react"
 import { useWebHaptics } from "web-haptics/react"
 import { AsciiArt } from "../ui/ascii-art"
 
-const states = [
-    { label: "Software Engineer" },
-    { label: "Frontend Engineer" },
-    { label: "React Engineer" }
-]
+const states = [{ label: "Software Engineer" }, { label: "Frontend Engineer" }, { label: "React Engineer" }]
 
 export function AboutSection() {
     const [currentStateIndex, setCurrentStateIndex] = useState(0)
     const { trigger } = useWebHaptics()
 
-     useEffect(() => {
+    useEffect(() => {
         const interval = setInterval(() => {
             setCurrentStateIndex((prevIndex) => (prevIndex + 1) % states.length)
         }, 4000)
         return () => clearInterval(interval)
-     }, [])
+    }, [])
 
     const handleCopyEmail = () => {
         navigator.clipboard.writeText("marius.ahsmus@gmail.com")
@@ -64,45 +60,34 @@ export function AboutSection() {
                     <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Link href={"https://github.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
                             <Button size={"xs"} variant={"outline"} className={"active:scale-98"}>
-                                <GitHub/>
+                                <GitHub />
                                 Github
                             </Button>
                         </Link>
                         <Link href={"https://x.com/mvriu5"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
                             <Button size={"xs"} variant={"outline"} className={"active:scale-98"}>
-                                <XformerlyTwitter/>
-                                X / Twitter
+                                <XformerlyTwitter />X / Twitter
                             </Button>
                         </Link>
                         <Tooltip>
-                            <TooltipTrigger render={
-                                <Button
-                                    size={"xs"}
-                                    className={"active:scale-98"}
-                                    variant={"outline"}
-                                    onClick={() => {
-                                        trigger("success")
-                                        handleCopyEmail()
-                                    }}
-                                >
-                                    <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5} />
-                                    Mail
-                                </Button>
-                            }/>
-                            <TooltipContent>
-                                Click to copy email to clipboard
-                            </TooltipContent>
+                            <TooltipTrigger
+                                render={
+                                    <Button
+                                        size={"xs"}
+                                        className={"active:scale-98"}
+                                        variant={"outline"}
+                                        onClick={() => {
+                                            trigger("success")
+                                            handleCopyEmail()
+                                        }}
+                                    >
+                                        <HugeiconsIcon icon={Mail01Icon} strokeWidth={2.5} />
+                                        Mail
+                                    </Button>
+                                }
+                            />
+                            <TooltipContent>Click to copy email to clipboard</TooltipContent>
                         </Tooltip>
-                        <Link href={"https://cal.com/mvriu5/15min"} rel="noopener noreferrer" target={"_blank"} onClick={() => trigger("medium")}>
-                            <Button
-                                size="xs"
-                                variant="outline"
-                                className="bg-blue-100 border-blue-300 text-blue-500 hover:text-blue-500 hover:bg-blue-200 active:scale-98"
-                            >
-                                <HugeiconsIcon icon={Calendar01Icon} />
-                                Book a call
-                            </Button>
-                        </Link>
                     </div>
                 </div>
             </div>
