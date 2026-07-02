@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import PlausibleProvider from "next-plausible"
 import localFont from "next/font/local"
 import type { ReactNode } from "react"
-import { Toaster } from "sonner"
 import "./globals.css"
 
 const neuton = localFont({
@@ -63,10 +62,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     return (
         <html lang="en" className={`${neuton.variable}`}>
             <body className={"antialiased"}>
-                <PlausibleProvider>
-                    {children}
-                    <Toaster />
-                </PlausibleProvider>
+                <PlausibleProvider>{children}</PlausibleProvider>
             </body>
         </html>
     )
