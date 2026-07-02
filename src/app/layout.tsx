@@ -1,24 +1,19 @@
-import { TooltipProvider } from "@/components/ui/tooltip"
 import type { Metadata } from "next"
-import PlausibleProvider from 'next-plausible'
-import { Geist_Mono, Inter } from "next/font/google"
-import localFont from 'next/font/local'
+import PlausibleProvider from "next-plausible"
+import localFont from "next/font/local"
 import type { ReactNode } from "react"
 import { Toaster } from "sonner"
 import "./globals.css"
 
-const fontSans = Inter({ subsets:['latin'], variable:'--font-sans' })
-
-const geistMono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] })
-
 const neuton = localFont({
-    src: [{
-        path: '../../public/Neuton-Regular.ttf',
-        weight: '400'
-    }],
-    variable: '--font-neuton'
+    src: [
+        {
+            path: "../../public/Neuton-Regular.ttf",
+            weight: "400",
+        },
+    ],
+    variable: "--font-neuton",
 })
-
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://ahsmus.com"),
@@ -40,8 +35,8 @@ export const metadata: Metadata = {
                 alt: "Marius Ahsmus",
                 width: 2752,
                 height: 1536,
-            }
-        ]
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
@@ -55,23 +50,21 @@ export const metadata: Metadata = {
                 alt: "Marius Ahsmus",
                 width: 1536,
                 height: 1536,
-            }
-        ]
+            },
+        ],
     },
     robots: {
         index: true,
-        follow: true
-    }
+        follow: true,
+    },
 }
 
-export default function RootLayout({children}: Readonly<{ children: ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
     return (
-        <html lang="en" className={`${geistMono.variable} ${fontSans.variable} ${neuton.variable}`}>
+        <html lang="en" className={`${neuton.variable}`}>
             <body className={"antialiased"}>
                 <PlausibleProvider>
-                    <TooltipProvider>
-                        {children}
-                    </TooltipProvider>
+                    {children}
                     <Toaster />
                 </PlausibleProvider>
             </body>
