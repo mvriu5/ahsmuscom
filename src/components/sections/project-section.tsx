@@ -13,6 +13,14 @@ const projects = [
         title: "Forge",
         link: "https://tryforge.io",
     },
+    {
+        title: "Paylod AI Plugin",
+        link: "https://github.com/mvriu5/payload-ai-plugin",
+    },
+    {
+        title: "Payload Icon Picker Plugin",
+        link: "https://github.com/mvriu5/payload-icon-picker",
+    },
 ] as const
 
 export function ProjectSection() {
