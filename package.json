@@ -12,7 +12,7 @@
     "dependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
-        "knip": "^6.15.0",
+        "knip": "^6.29.0",
         "motion": "^12.42.2",
         "next": "^16.2.9",
         "next-plausible": "^4.0.0",
